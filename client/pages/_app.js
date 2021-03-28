@@ -34,6 +34,13 @@ const App = ({ Component }) => {
           href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@1,400;1,700;1,900&display=swap"
           rel="stylesheet"
         />
+        <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet"></link>
+        <link
+          rel="stylesheet"
+          href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+          integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+          crossorigin="anonymous"
+        />
       </Head>
       <ThemeProvider theme={theme}>
         <GlobalStyles />

@@ -2,14 +2,19 @@ import React from 'react';
 import Header from '../components/Header';
 import axios from 'axios';
 import { END } from 'redux-saga';
+import styled from 'styled-components';
 
 import wrapper from '../store/configureStore';
 import { LOAD_MY_INFO_REQUEST } from '../reducers/userReducer';
+import Sidebar from '../components/Sidebar';
 
 const Home = () => {
   return (
     <>
       <Header />
+      <Contents>
+        <Sidebar />
+      </Contents>
     </>
   );
 };
@@ -31,3 +36,7 @@ export const getServerSideProps = wrapper.getServerSideProps(async (context) => 
 });
 
 export default Home;
+
+const Contents = styled.div`
+  height: calc(100vh - 100px);
+`;
