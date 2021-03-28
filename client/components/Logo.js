@@ -5,7 +5,9 @@ const Logo = ({ width }) => {
   return (
     <>
       <Wrapper width={width}>
-        <LogoShape />
+        <WWW>
+          <LogoShape />
+        </WWW>
         <Text>
           <p>
             <span>당</span>신은
@@ -28,12 +30,16 @@ const Wrapper = styled.div`
   position: relative;
   width: ${(props) => (props.width ? props.width : '200px')};
   height: ${(props) => (props.width ? props.width / 2 : '100px')};
-  padding: 0.5rem;
+`;
+const WWW = styled.div`
+  width: 50%;
+  height: 100%;
+  padding: 1rem;
 `;
 
 const LogoShape = styled.div`
   position: relative;
-  width: 50%;
+  width: 100%;
   height: 100%;
   background: blue;
   border-radius: 50%;
@@ -77,12 +83,12 @@ const LogoShape = styled.div`
 const Text = styled.div`
   position: absolute;
   top: 50%;
-  right: 0;
+  right: 17px;
   transform: translateY(-50%);
   p {
     letter-spacing: 0.1rem;
     font-weight: 500;
-    line-height: 1.3rem;
+    line-height: 1.4rem;
     font-size: 1rem;
     color: rgba(0, 0, 0, 0.6);
     span {
