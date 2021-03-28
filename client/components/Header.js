@@ -21,46 +21,44 @@ const Header = () => {
   // Make Develop branch
   return (
     <Wrapper>
-      <Container>
-        <Row width="20%">
-          <a href="/">
-            <Logo />
-          </a>
-        </Row>
-        <Row show="m">
-          <ul>
-            <li className={asPath === '/' ? 'active' : ''}>
-              <Link href="/">Home</Link>
+      <Row className="header-logo" width="20%">
+        <a href="/">
+          <Logo />
+        </a>
+      </Row>
+      <StyledRow show="m" width="calc(80% - 170px)">
+        <ul>
+          <li className={asPath === '/' ? 'active' : ''}>
+            <Link href="/">Home</Link>
+          </li>
+          <li className={asPath === '/page1' ? 'active' : ''}>
+            <Link href="/">페이지2</Link>
+          </li>
+          <li className={asPath === '/page2' ? 'active' : ''}>
+            <Link href="/">페이지3</Link>
+          </li>
+          <li className={asPath === '/page3' ? 'active' : ''}>
+            <Link href="/">페이지4</Link>
+          </li>
+        </ul>
+      </StyledRow>
+      <Row className="header-user" width="170px">
+        {me ? (
+          <>
+            <li>{me.name} 님</li>
+            <li onClick={onClickLogOut}>로그아웃</li>
+          </>
+        ) : (
+          <>
+            <li>
+              <a href="/signin">로그인</a>
             </li>
-            <li className={asPath === '/page1' ? 'active' : ''}>
-              <Link href="/">페이지2</Link>
+            <li>
+              <a href="/signup">회원가입</a>
             </li>
-            <li className={asPath === '/page2' ? 'active' : ''}>
-              <Link href="/">페이지3</Link>
-            </li>
-            <li className={asPath === '/page3' ? 'active' : ''}>
-              <Link href="/">페이지4</Link>
-            </li>
-          </ul>
-        </Row>
-        <Row className="header-user">
-          {me ? (
-            <>
-              <li>{me.name} 님</li>
-              <li onClick={onClickLogOut}>로그아웃</li>
-            </>
-          ) : (
-            <>
-              <li>
-                <a href="/signin">로그인</a>
-              </li>
-              <li>
-                <a href="/signup">회원가입</a>
-              </li>
-            </>
-          )}
-        </Row>
-      </Container>
+          </>
+        )}
+      </Row>
     </Wrapper>
   );
 };
@@ -70,15 +68,24 @@ export default Header;
 const Wrapper = styled.div`
   height: 100px;
   line-height: 100px;
-  border: 1px solid darkblue;
-
+  border-bottom: 1px solid ${(props) => props.theme.line[0]};
+  .header-logo {
+    width: 20%;
+    float: left;
+  }
   img {
     width: 100px;
     height: 100px;
     vertical-align: middle;
   }
-
+  .center {
+    width: 100%;
+    text-align: center;
+  }
   ul {
+    height: 100%;
+    display: inline-block;
+    margin: 0 auto;
     li {
       float: left;
       margin-right: 60px;
@@ -103,4 +110,8 @@ const Wrapper = styled.div`
       float: left;
     }
   }
+`;
+
+const StyledRow = styled(Row)`
+  text-align: center;
 `;
