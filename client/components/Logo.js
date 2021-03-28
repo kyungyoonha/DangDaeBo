@@ -39,6 +39,7 @@ const LogoShape = styled.div`
   border-radius: 50%;
   box-shadow: 0 0 0 0.3rem #000, 0 0 1rem rgba(0, 0, 0, 0.8), 0 0 1rem rgba(0, 0, 0, 0.8);
   border: 0.3rem solid #fff;
+
   overflow: hidden;
 
   &::before {
