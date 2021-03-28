@@ -6,7 +6,7 @@ const theme = {
   green: ['#37b24d', '#2f9e44', '#2b8a3e'],
   blue: ['#4290aa'],
   red: ['#c92a2a'],
-  line: ['#dddddd'],
+  line: ['#eeeeee', '#dddddd'],
 };
 
 export default theme;
