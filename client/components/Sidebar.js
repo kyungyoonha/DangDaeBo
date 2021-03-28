@@ -1,20 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Button } from './Form';
+import { Calendar } from './Calender';
 
 const Sidebar = () => {
   return (
     <Wrapper>
-      <div className="calendar-header">
-        <Button>
-          <i className="fas fa-angle-left"></i>
-        </Button>
-        2021-03-28
-        <Button>
-          <i className="fas fa-angle-right"></i>
-        </Button>
-      </div>
-      <Calendar>달력</Calendar>
+      <Calendar />
       <p>당신은 대한민국의 보배입니다.</p>
       <h1>이곳은 대한민국의 의인들을 기억하기 위한 곳입니다.🌺</h1>
       <h3>Ea non cupidatat quis sunt velit amet Lorem sint veniam.</h3>
@@ -86,14 +77,4 @@ const Wrapper = styled.div`
       transform: translateX(400px) skewX(45deg);
     }
   }
-`;
-
-const Calendar = styled.div`
-  width: 300px;
-  height: 300px;
-  background: #fff;
-  border-radius: 5px;
-  /* box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7); */
-  margin-bottom: 30px;
-  border: 1px solid ${(props) => props.theme.line[0]};
 `;

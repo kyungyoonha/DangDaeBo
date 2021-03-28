@@ -67,7 +67,7 @@ export default React.memo(Header);
 const Wrapper = styled.div`
   height: 100px;
   line-height: 100px;
-  border-bottom: 1px solid ${(props) => props.theme.line[0]};
+  border-bottom: 1px solid ${(props) => props.theme.line[1]};
   .header-logo {
     width: 20%;
     float: left;
