@@ -2,10 +2,10 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 
-const Button = ({ type = 'submit', color = 'gray', onClick, children }) => {
+const Button = ({ type = 'submit', color = 'gray', onClick, children, width }) => {
   return (
     <>
-      <StyledButton type={type} onClick={onClick} color={color}>
+      <StyledButton type={type} onClick={onClick} color={color} width={width}>
         {children}
       </StyledButton>
     </>
@@ -22,10 +22,10 @@ Button.propTypes = {
 export default React.memo(Button);
 
 const StyledButton = styled.button`
-  width: 100%;
   padding: 10px;
   border-radius: 4px;
   border: 1px solid ${(props) => props.theme.gray[0]};
+  width: ${(props) => props.width || ''};
 
   ${(props) => {
     switch (props.color) {
@@ -54,5 +54,5 @@ const StyledButton = styled.button`
           color: white;
         `;
     }
-  }}
+  }};
 `;

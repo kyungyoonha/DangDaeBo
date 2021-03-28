@@ -67,7 +67,7 @@ const Signin = () => {
           error={errors.pw}
         />
 
-        <Button onClick={onSubmit} color="blue">
+        <Button onClick={onSubmit} color="blue" width="100%">
           로그인
         </Button>
       </Form>

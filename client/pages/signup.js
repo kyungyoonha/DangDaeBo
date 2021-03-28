@@ -93,7 +93,7 @@ const Signup = () => {
           error={errors.pwConfirm}
         />
 
-        <Button onClick={onSubmit} color="blue">
+        <Button onClick={onSubmit} color="blue" width="100%">
           로그인
         </Button>
       </Form>
