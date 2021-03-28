@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 
-import { Container, Row } from './Layout';
+import { Row } from './Layout';
 import { SIGN_OUT_REQUEST } from '../reducers/userReducer';
 import Logo from './Logo';
 
@@ -18,7 +18,6 @@ const Header = () => {
       type: SIGN_OUT_REQUEST,
     });
   };
-  // Make Develop branch
   return (
     <Wrapper>
       <Row className="header-logo" width="20%">
@@ -29,16 +28,16 @@ const Header = () => {
       <StyledRow show="m" width="calc(80% - 170px)">
         <ul>
           <li className={asPath === '/' ? 'active' : ''}>
-            <Link href="/">Home</Link>
+            <Link href="/">기억하자</Link>
           </li>
           <li className={asPath === '/page1' ? 'active' : ''}>
-            <Link href="/">페이지2</Link>
+            <Link href="/">오늘의 의인</Link>
           </li>
           <li className={asPath === '/page2' ? 'active' : ''}>
-            <Link href="/">페이지3</Link>
+            <Link href="/">의인 등록</Link>
           </li>
           <li className={asPath === '/page3' ? 'active' : ''}>
-            <Link href="/">페이지4</Link>
+            <Link href="/">소개</Link>
           </li>
         </ul>
       </StyledRow>
@@ -63,7 +62,7 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default React.memo(Header);
 
 const Wrapper = styled.div`
   height: 100px;
@@ -105,6 +104,7 @@ const Wrapper = styled.div`
 
   .header-user {
     float: right;
+
     li {
       margin-left: 20px;
       float: left;

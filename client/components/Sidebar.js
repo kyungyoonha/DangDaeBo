@@ -41,7 +41,6 @@ const Wrapper = styled.div`
   p {
     font-weight: 200;
     padding-bottom: 5px;
-    margin-bottom: 10px;
   }
 
   h1 {
@@ -56,6 +55,7 @@ const Wrapper = styled.div`
     font-family: 'Black Han Sans', sans-serif;
     text-align: center;
     color: rgba(255, 255, 255, 0.8);
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.7);
 
     &::before {
       content: '';
@@ -93,6 +93,7 @@ const Calendar = styled.div`
   height: 300px;
   background: #fff;
   border-radius: 5px;
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7);
+  /* box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7); */
   margin-bottom: 30px;
+  border: 1px solid ${(props) => props.theme.line[0]};
 `;
