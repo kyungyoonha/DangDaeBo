@@ -6,6 +6,7 @@ import Link from 'next/link';
 
 import { Container, Row } from './Layout';
 import { SIGN_OUT_REQUEST } from '../reducers/userReducer';
+import Logo from './Logo';
 
 const Header = () => {
   const asPath = useRouter().asPath;
@@ -23,10 +24,7 @@ const Header = () => {
       <Container>
         <Row width="20%">
           <a href="/">
-            <img
-              src="https://user-images.githubusercontent.com/29701385/109490996-6157e780-7acc-11eb-96bb-52ac25c7f64d.png"
-              alt=""
-            />
+            <Logo />
           </a>
         </Row>
         <Row show="m">
