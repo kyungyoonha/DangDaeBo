@@ -5,7 +5,7 @@ const Weeks = ({ num, weekSeq, startIndex }) => {
   return (
     <WrapperTr>
       {[...new Array(7)].map((day, i) => (
-        <td>{i + 1}</td>
+        <td key={i}>{i + 1}</td>
       ))}
     </WrapperTr>
   );

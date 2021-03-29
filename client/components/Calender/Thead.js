@@ -4,11 +4,14 @@ import styled from 'styled-components';
 const WeeksList = ['일', '월', '화', '수', '목', '금', '토'];
 const Thead = () => {
   return (
-    <WrapperTr>
-      {WeeksList.map((weekName) => (
-        <th key={weekName}>{weekName}</th>
-      ))}
-    </WrapperTr>
+    <thead>
+      <WrapperTr>
+        {WeeksList.map((weekName) => (
+          <th key={weekName}>{weekName}</th>
+        ))}
+      </WrapperTr>
+    </thead>
+
   );
 };
 

@@ -1,25 +1,33 @@
 import React from 'react';
 import styled from 'styled-components';
+
+
 import { Button } from '../Form';
+import { calcendarFunc } from '../../util/calendarFunc';
 import { Thead, Weeks } from './';
 
 const Calendar = () => {
+  calcendarFunc();
   return (
     <Wrapper>
       <div className="calendar-header">
-        <Button>
+        <Button onClick={() => {}}>
           <i className="fas fa-angle-left"></i>
         </Button>
         <span>2021-03</span>
-        <Button>
+        <Button onClick={() => {}}>
+
           <i className="fas fa-angle-right"></i>
         </Button>
       </div>
       <StyledTable>
         <Thead />
-        {[...new Array(6)].map((weekSeq) => (
-          <Weeks key={weekSeq} weekSeq={weekSeq + 1} />
-        ))}
+        <tbody>
+          {[...new Array(6)].map((weekSeq, i) => (
+            <Weeks key={i} weekSeq={i + 1} />
+          ))}
+        </tbody>
+
       </StyledTable>
     </Wrapper>
   );
