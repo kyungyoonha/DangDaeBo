@@ -1,11 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Weeks = ({ num, weekSeq, startIndex }) => {
+const Weeks = ({ week }) => {
+  console.log(week);
   return (
     <WrapperTr>
-      {[...new Array(7)].map((day, i) => (
-        <td key={i}>{i + 1}</td>
+      {week.map((item, i) => (
+        <td className={item.isGray ? 'gray' : ''} key={i}>
+          {item.day}
+        </td>
       ))}
     </WrapperTr>
   );
@@ -18,9 +21,13 @@ const WrapperTr = styled.tr`
   height: 40px;
   border-bottom: 1px solid ${(props) => props.theme.line[0]};
   text-align: center;
-  color: ${(props) => props.theme.gray[0]};
+  color: ${(props) => props.theme.gray[2]};
   li {
     float: left;
     padding: 0 10px;
+  }
+
+  td.gray {
+    color: ${(props) => props.theme.gray[0]};
   }
 `;

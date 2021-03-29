@@ -1,33 +1,35 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-
 
 import { Button } from '../Form';
 import { calcendarFunc } from '../../util/calendarFunc';
 import { Thead, Weeks } from './';
 
 const Calendar = () => {
-  calcendarFunc();
+  const [year, setYear] = useState(new Date().getFullYear());
+  const [month, setMonth] = useState(new Date().getMonth() + 1);
+
+  const weeks = calcendarFunc(year, month - 1);
   return (
     <Wrapper>
       <div className="calendar-header">
-        <Button onClick={() => {}}>
+        <Button onClick={() => setMonth(month - 1)}>
           <i className="fas fa-angle-left"></i>
         </Button>
-        <span>2021-03</span>
-        <Button onClick={() => {}}>
-
+        <span>
+          {year}-{month}
+        </span>
+        <Button onClick={() => setMonth(month + 1)}>
           <i className="fas fa-angle-right"></i>
         </Button>
       </div>
       <StyledTable>
         <Thead />
         <tbody>
-          {[...new Array(6)].map((weekSeq, i) => (
-            <Weeks key={i} weekSeq={i + 1} />
+          {weeks.map((week, idx) => (
+            <Weeks key={idx} week={week} />
           ))}
         </tbody>
-
       </StyledTable>
     </Wrapper>
   );
