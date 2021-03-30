@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import { Button } from '../Form';
+import { Button } from '../Form/Index';
 import { calcendarFunc } from '../../util/calendarFunc';
 import { Thead, Weeks } from './';
 
@@ -10,16 +10,35 @@ const Calendar = () => {
   const [month, setMonth] = useState(new Date().getMonth() + 1);
 
   const weeks = calcendarFunc(year, month - 1);
+
+  const onClickPrevButton = () => {
+    if (month <= 1) {
+      setMonth(12);
+      setYear((prevYear) => prevYear - 1);
+    } else {
+      setMonth((prevMonth) => prevMonth - 1);
+    }
+  };
+
+  const onClickNextButton = () => {
+    if (month >= 12) {
+      setMonth(1);
+      setYear((prevYear) => prevYear + 1);
+    } else {
+      setMonth((prevMonth) => prevMonth + 1);
+    }
+  };
+
   return (
     <Wrapper>
       <div className="calendar-header">
-        <Button onClick={() => setMonth(month - 1)}>
+        <Button onClick={onClickPrevButton}>
           <i className="fas fa-angle-left"></i>
         </Button>
         <span>
           {year}-{month}
         </span>
-        <Button onClick={() => setMonth(month + 1)}>
+        <Button onClick={onClickNextButton}>
           <i className="fas fa-angle-right"></i>
         </Button>
       </div>
