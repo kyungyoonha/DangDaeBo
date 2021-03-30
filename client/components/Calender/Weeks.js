@@ -1,12 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { changeDataFormat } from '../../util/calendarFunc';
+
 const Weeks = ({ week }) => {
-  console.log(week);
+  const today = new Date();
+  const todayKey = changeDataFormat(today.getFullYear(), today.getMonth(), today.getDate());
+
   return (
     <WrapperTr>
       {week.map((item, i) => (
-        <td className={item.isGray ? 'gray' : ''} key={i}>
+        <td className={`${item.isGray ? 'gray' : ''} ${todayKey === item.key ? ' today' : ''}`} key={i}>
           {item.day}
         </td>
       ))}
@@ -14,7 +18,7 @@ const Weeks = ({ week }) => {
   );
 };
 
-export default Weeks;
+export default React.memo(Weeks);
 
 const WrapperTr = styled.tr`
   width: 100%;
@@ -29,5 +33,11 @@ const WrapperTr = styled.tr`
 
   td.gray {
     color: ${(props) => props.theme.gray[0]};
+  }
+
+  td.today {
+    background: pink;
+    color: white;
+    border-radius: 50%;
   }
 `;

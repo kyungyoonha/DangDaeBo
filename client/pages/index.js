@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import wrapper from '../store/configureStore';
 import { LOAD_MY_INFO_REQUEST } from '../reducers/userReducer';
 import Sidebar from '../components/Sidebar';
+import { Calendar } from '../components/Calender';
 
 const Home = () => {
   return (
@@ -14,6 +15,7 @@ const Home = () => {
       <Header />
       <Contents>
         <Sidebar />
+        <Calendar />
       </Contents>
     </>
   );
@@ -39,4 +41,9 @@ export default Home;
 
 const Contents = styled.div`
   height: calc(100vh - 100px);
+  display: flex;
+  align-items: stretch;
+
+  .main-header {
+  }
 `;

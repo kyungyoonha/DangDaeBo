@@ -1,4 +1,4 @@
-export const calcendarFunc = (year, month) => {
+export const calendarFunc = (year, month) => {
   const leapYear = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
   const notLeapYear = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
