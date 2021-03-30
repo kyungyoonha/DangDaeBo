@@ -1,70 +1,139 @@
 import React from 'react';
 import styled from 'styled-components';
 
-
-import { Button } from '../Form';
-import { calcendarFunc } from '../../util/calendarFunc';
-import { Thead, Weeks } from './';
-
 const Calendar = () => {
-  calcendarFunc();
   return (
     <Wrapper>
-      <div className="calendar-header">
-        <Button onClick={() => {}}>
-          <i className="fas fa-angle-left"></i>
-        </Button>
-        <span>2021-03</span>
-        <Button onClick={() => {}}>
+      <div className="cal-header">2021-03</div>
 
-          <i className="fas fa-angle-right"></i>
-        </Button>
-      </div>
-      <StyledTable>
-        <Thead />
+      <table>
+        <thead>
+          <tr>
+            <th>일</th>
+            <th>월</th>
+            <th>화</th>
+            <th>수</th>
+            <th>목</th>
+            <th>금</th>
+            <th>토</th>
+          </tr>
+        </thead>
         <tbody>
-          {[...new Array(6)].map((weekSeq, i) => (
-            <Weeks key={i} weekSeq={i + 1} />
-          ))}
+          <tr className="row-date">
+            <th>1</th>
+            <th>2</th>
+            <th>3</th>
+            <th>4</th>
+            <th>5</th>
+            <th>6</th>
+            <th>7</th>
+          </tr>
+          <tr>
+            <td>
+              <span>고</span>안중근
+              <br />
+              <span>고</span>유관순
+              <br />
+              <span>고</span>유관순
+              <br />
+              <span>고</span>안중근
+              <br />
+              <span>고</span>유관순
+            </td>
+            <td>
+              <span className="yellow">고</span>유관순
+            </td>
+            <td>
+              <span className="yellow">고</span>유관순
+            </td>
+            <td>
+              <span className="yellow">고</span>유관순
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr className="row-date">
+            <th>8</th>
+            <th>9</th>
+            <th>10</th>
+            <th>11</th>
+            <th>12</th>
+            <th>13</th>
+            <th>14</th>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
         </tbody>
-
-      </StyledTable>
+      </table>
     </Wrapper>
   );
 };
 
-export default React.memo(Calendar);
+export default Calendar;
 
 const Wrapper = styled.div`
-  .calendar-header {
-    position: relative;
+  flex: 1;
+  overflow-y: scroll;
+
+  .cal-header {
     text-align: center;
-    width: 100%;
-    overflow: hidden;
-
-    button {
-      margin: 5px 5px;
-      padding: 5px 10px;
-    }
-
-    span {
-      font-size: 1.3rem;
-      margin: 0 10px;
-    }
+    height: 50px;
+    line-height: 50px;
+    background: #03c75a;
   }
-`;
 
-const StyledTable = styled.table`
-  width: 300px;
-  background: #fff;
-  color: #000;
-  border-radius: 5px;
-  /* box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7); */
-  margin-bottom: 30px;
-  border: 1px solid ${(props) => props.theme.line[1]};
-  padding: 10px 0 15px;
+  table {
+    width: 100%;
+    /* height: 200%; */
+    border-collapse: collapse;
+  }
 
-  tr {
-    border: 1px solid ${(props) => props.theme.line[0]};
+  table,
+  th,
+  td {
+    border: 1px solid ${(props) => props.theme.line[1]};
+  }
+
+  td,
+  th {
+    width: 14.28%;
+  }
+
+  thead {
+    background: #4b4e3d;
+    color: white;
+  }
+
+  .row-date {
+    background: ${(props) => props.theme.gray[0]};
+  }
+
+  tbody td {
+    height: 500px;
+    padding-left: 7px;
+    padding-top: 10px;
+    vertical-align: top;
+  }
+
+  span {
+    background-color: #428fd7;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    padding: 0px 5px;
+    color: white;
+    margin-right: 5px;
+    text-align: center;
+  }
+
+  span.yellow {
+    background: ${(props) => props.theme.green[1]};
   }
 `;

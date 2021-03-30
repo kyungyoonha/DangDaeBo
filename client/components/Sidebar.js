@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Calendar } from './Calender';
+import { CalendarMini } from './Calender';
 
 const Sidebar = () => {
   return (
     <Wrapper>
-      <Calendar />
+      <CalendarMini />
       <p>당신은 대한민국의 보배입니다.</p>
       <h1>이곳은 대한민국의 의인들을 기억하기 위한 곳입니다.🌺</h1>
       <h3>Ea non cupidatat quis sunt velit amet Lorem sint veniam.</h3>
@@ -20,7 +20,6 @@ export default React.memo(Sidebar);
 
 const Wrapper = styled.div`
   width: 350px;
-  height: 100%;
   background: #4290aa;
   padding: 25px;
   color: #fff;
