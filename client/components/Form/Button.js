@@ -2,10 +2,10 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 
-const Button = ({ type = 'submit', color = 'gray', onClick, children, width }) => {
+const Button = ({ className, type = 'submit', color = 'gray', onClick, children, width }) => {
   return (
     <>
-      <StyledButton type={type} onClick={onClick} color={color} width={width}>
+      <StyledButton className={className} type={type} onClick={onClick} color={color} width={width}>
         {children}
       </StyledButton>
     </>
@@ -13,6 +13,7 @@ const Button = ({ type = 'submit', color = 'gray', onClick, children, width }) =
 };
 
 Button.propTypes = {
+  className: PropTypes.string,
   type: PropTypes.string,
   onClick: PropTypes.func.isRequired,
   color: PropTypes.string,
