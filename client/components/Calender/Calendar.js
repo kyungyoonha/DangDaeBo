@@ -3,13 +3,14 @@ import styled from 'styled-components';
 
 import { Button } from '../../components/Form';
 import { calendarFunc } from '../../util/calendarFunc';
-import { Thead, Weeks } from '.';
+import { makeData } from '../../util/fakeData';
 
 const Calendar = () => {
   const [year, setYear] = useState(new Date().getFullYear());
   const [month, setMonth] = useState(new Date().getMonth() + 1);
 
   const weeks = calendarFunc(year, month - 1);
+  const dataObj = makeData(weeks);
 
   const onClickPrevButton = () => {
     if (month <= 1) {
@@ -28,6 +29,8 @@ const Calendar = () => {
       setMonth((prevMonth) => prevMonth + 1);
     }
   };
+
+  console.log(dataObj['2021-04-23']);
   return (
     <Wrapper>
       <div className="cal-header">
@@ -59,9 +62,17 @@ const Calendar = () => {
         {weeks.map((week) => (
           <ul>
             {week.map((item, idx) => (
-              <li>
+              <li key={item.day}>
                 <div className="week-day">{item.day}</div>
-                <div className="week-data">few</div>
+                <div className="week-data">
+                  {dataObj[item.key] &&
+                    dataObj[item.key].map((data) => (
+                      <p key={data.key}>
+                        <span value={data.category}>{data.category}</span>
+                        {data.name}
+                      </p>
+                    ))}
+                </div>
               </li>
             ))}
           </ul>
@@ -152,7 +163,7 @@ const Wrapper = styled.div`
     padding-top: 10px;
   }
 
-  .ctg {
+  .week-data span {
     background-color: #428fd7;
     border-radius: 5px;
     font-size: 0.9rem;
@@ -160,10 +171,18 @@ const Wrapper = styled.div`
     color: white;
     margin-right: 5px;
     text-align: center;
-  }
 
-  .ctg.yellow {
-    background: ${(props) => props.theme.green[1]};
+    &[value='1'] {
+      background: red;
+    }
+
+    &[value='2'] {
+      background: green;
+    }
+
+    &[value='3'] {
+      background: black;
+    }
   }
 `;
 
