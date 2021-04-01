@@ -93,8 +93,8 @@ export const calendarFunc = (year, month) => {
 };
 
 export const changeDataFormat = (year, month, date) => {
-  const monthString = month.length === 1 ? `0${month + 1}` : String(month + 1);
-  const dateString = date.length === 1 ? `0${date}` : String(date);
+  const monthString = month < 10 ? `0${Number(month) + 1}` : String(month + 1);
+  const dateString = date < 10 ? `0${date}` : String(date);
 
   return `${year}-${monthString}-${dateString}`;
 };

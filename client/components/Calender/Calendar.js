@@ -1,78 +1,83 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
+import { Button } from '../../components/Form';
+import { calendarFunc } from '../../util/calendarFunc';
+import { makeData } from '../../util/fakeData';
+
 const Calendar = () => {
+  const [year, setYear] = useState(new Date().getFullYear());
+  const [month, setMonth] = useState(new Date().getMonth() + 1);
+
+  const weeks = calendarFunc(year, month - 1);
+  const dataObj = makeData(weeks);
+
+  const onClickPrevButton = () => {
+    if (month <= 1) {
+      setMonth(12);
+      setYear((prevYear) => prevYear - 1);
+    } else {
+      setMonth((prevMonth) => prevMonth - 1);
+    }
+  };
+
+  const onClickNextButton = () => {
+    if (month >= 12) {
+      setMonth(1);
+      setYear((prevYear) => prevYear + 1);
+    } else {
+      setMonth((prevMonth) => prevMonth + 1);
+    }
+  };
+
+  console.log(dataObj['2021-04-23']);
   return (
     <Wrapper>
-      <div className="cal-header">2021-03</div>
+      <div className="cal-header">
+        <div className="cal-title">
+          <StyledButton onClick={onClickPrevButton}>
+            <i className="fas fa-angle-left"></i>
+          </StyledButton>
+          <span>
+            {year}-{month}
+          </span>
+          <StyledButton onClick={onClickNextButton}>
+            <i className="fas fa-angle-right"></i>
+          </StyledButton>
+        </div>
+        <div className="week-name">
+          <ul>
+            <li>일</li>
+            <li>월</li>
+            <li>화</li>
+            <li>수</li>
+            <li>목</li>
+            <li>금</li>
+            <li>토</li>
+          </ul>
+        </div>
+      </div>
 
-      <table>
-        <thead>
-          <tr>
-            <th>일</th>
-            <th>월</th>
-            <th>화</th>
-            <th>수</th>
-            <th>목</th>
-            <th>금</th>
-            <th>토</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr className="row-date">
-            <th>1</th>
-            <th>2</th>
-            <th>3</th>
-            <th>4</th>
-            <th>5</th>
-            <th>6</th>
-            <th>7</th>
-          </tr>
-          <tr>
-            <td>
-              <span>고</span>안중근
-              <br />
-              <span>고</span>유관순
-              <br />
-              <span>고</span>유관순
-              <br />
-              <span>고</span>안중근
-              <br />
-              <span>고</span>유관순
-            </td>
-            <td>
-              <span className="yellow">고</span>유관순
-            </td>
-            <td>
-              <span className="yellow">고</span>유관순
-            </td>
-            <td>
-              <span className="yellow">고</span>유관순
-            </td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr className="row-date">
-            <th>8</th>
-            <th>9</th>
-            <th>10</th>
-            <th>11</th>
-            <th>12</th>
-            <th>13</th>
-            <th>14</th>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-        </tbody>
-      </table>
+      <div className="cal-body">
+        {weeks.map((week) => (
+          <ul>
+            {week.map((item, idx) => (
+              <li key={item.day}>
+                <div className="week-day">{item.day}</div>
+                <div className="week-data">
+                  {dataObj[item.key] &&
+                    dataObj[item.key].map((data) => (
+                      <p key={data.key}>
+                        <span value={data.category}>{data.category}</span>
+                        {data.name}
+                      </p>
+                    ))}
+                </div>
+              </li>
+            ))}
+          </ul>
+        ))}
+      </div>
     </Wrapper>
   );
 };
@@ -81,49 +86,84 @@ export default Calendar;
 
 const Wrapper = styled.div`
   flex: 1;
-  overflow-y: scroll;
+  position: relative;
+  overflow: scroll;
 
   .cal-header {
-    text-align: center;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0px;
+    width: 100%;
+  }
+
+  .cal-title {
     height: 50px;
-    line-height: 50px;
+    text-align: center;
     background: #03c75a;
   }
 
-  table {
-    width: 100%;
-    /* height: 200%; */
-    border-collapse: collapse;
+  .week-name {
+    ul {
+      border: 0px solid ${(props) => props.theme.line[1]};
+      border-width: 0 0 1px 1px;
+      overflow: hidden;
+    }
+    ul li {
+      float: left;
+      width: 14.28%;
+      height: 25px;
+      line-height: 25px;
+      text-align: center;
+      border: 0px solid ${(props) => props.theme.line[1]};
+      border-width: 1px 1px 0 0;
+      background: #4b4e3d;
+      color: white;
+    }
+
+    ul li:nth-child(1) {
+      color: pink;
+    }
+
+    ul li:last-child {
+      color: skyblue;
+    }
   }
 
-  table,
-  th,
-  td {
-    border: 1px solid ${(props) => props.theme.line[1]};
+  .cal-body {
+    ul {
+      border: 1px solid ${(props) => props.theme.line[1]};
+      border-width: 0 0 1px 1px;
+      overflow: hidden;
+    }
+    ul li {
+      float: left;
+      width: 14.28%;
+      border: 0px solid ${(props) => props.theme.line[1]};
+      border-width: 1px 1px 0 0;
+    }
+
+    ul li:nth-child(1) .week-day {
+      color: pink;
+    }
+
+    ul li:last-child .week-day {
+      color: skyblue;
+    }
   }
 
-  td,
-  th {
-    width: 14.28%;
+  .week-day {
+    background: ${(props) => props.theme.line[0]};
+    text-align: center;
+    top: 0px;
   }
 
-  thead {
-    background: #4b4e3d;
-    color: white;
-  }
-
-  .row-date {
-    background: ${(props) => props.theme.gray[0]};
-  }
-
-  tbody td {
-    height: 500px;
+  .week-data {
+    min-height: 500px;
     padding-left: 7px;
     padding-top: 10px;
-    vertical-align: top;
   }
 
-  span {
+  .week-data span {
     background-color: #428fd7;
     border-radius: 5px;
     font-size: 0.9rem;
@@ -131,9 +171,22 @@ const Wrapper = styled.div`
     color: white;
     margin-right: 5px;
     text-align: center;
-  }
 
-  span.yellow {
-    background: ${(props) => props.theme.green[1]};
+    &[value='1'] {
+      background: red;
+    }
+
+    &[value='2'] {
+      background: green;
+    }
+
+    &[value='3'] {
+      background: black;
+    }
   }
+`;
+
+const StyledButton = styled(Button)`
+  padding: 5px 10px;
+  margin: 10px;
 `;
