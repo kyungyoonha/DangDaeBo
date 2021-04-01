@@ -7,6 +7,7 @@ import { Input, Button } from '../components/Form';
 import { Container } from '../components/Layout';
 import useInputs from '../hooks/useInputs';
 import { SIGN_IN_REQUEST } from '../reducers/userReducer';
+import Logo from '../components/Logo';
 
 const initialState = {
   email: '',
@@ -44,6 +45,10 @@ const Signin = () => {
 
   return (
     <Container>
+      <div className="sign-header">
+        <Logo />
+        <span>대한민국의 보배를 만나보세요.</span>
+      </div>
       <Form>
         <h1>로그인</h1>
         <Input
@@ -83,6 +88,10 @@ const Form = styled.form`
   border-radius: 1%;
   height: 700px;
   padding: 80px 20px;
+
+  .sign-header {
+    text-align: center;
+  }
 
   h1 {
     font-weight: 900;

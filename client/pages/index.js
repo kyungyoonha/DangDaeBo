@@ -5,8 +5,8 @@ import { END } from 'redux-saga';
 import styled from 'styled-components';
 
 import wrapper from '../store/configureStore';
-import { LOAD_MY_INFO_REQUEST } from '../reducers/userReducer';
 import Sidebar from '../components/Sidebar';
+import { LOAD_MY_INFO_REQUEST } from '../reducers/userReducer';
 import { Calendar } from '../components/Calender';
 
 const Home = () => {
