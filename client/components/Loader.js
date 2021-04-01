@@ -1,18 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { LogoBox } from './Logo';
+
 const Loader = () => {
   return (
-    <Wrapper>
-      <Spinner />
-      <SpinnerBlue />
-    </Wrapper>
+    <Background>
+      <div className="logo-wrapper">
+        <Logo />
+        <p>Loading...</p>
+      </div>
+    </Background>
   );
 };
 
-export default Loader;
+export default React.memo(Loader);
 
-const Wrapper = styled.div`
+const Background = styled.div`
   position: fixed;
   top: 100px;
   left: 0;
@@ -20,78 +24,59 @@ const Wrapper = styled.div`
   height: calc(100% - 100px);
   background: rgba(0, 0, 0, 0.7);
   z-index: 2;
-`;
 
-const Spinner = styled.span`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 200px;
-  height: 200px;
-  background: #fff;
-  border-radius: 50%;
-  border: 4px solid #fff;
-  box-shadow: 0 0 10px #fff;
-  animation: animation-rotate 1s linear infinite;
-
-  &::before {
-    content: '';
+  .logo-wrapper {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 150px;
-    height: 150px;
-    border: 8px solid transparent;
-    border-left: 8px solid red;
-    border-top: 8px solid red;
-    border-radius: 50%;
-  }
-  &::after {
-    content: '';
-    position: absolute;
-    top: 19%;
-    right: 16%;
-    width: 15px;
-    height: 15px;
-    background: red;
-    border-radius: 50%;
-    box-shadow: 0 0 10px red;
+    width: 200px;
+    height: 200px;
+    background: #fff;
+    border-radius: 10%;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5), 0 0 30px rgba(0, 0, 0, 0.5);
   }
 
-  @keyframes animation-rotate {
+  p {
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: ${(props) => props.theme.gray[1]};
+
+    &::before {
+      content: 'Loading...';
+      position: absolute;
+      top: 0;
+      left: 0;
+      color: #000;
+      width: 50%;
+      overflow: hidden;
+      animation: animation-text 2s linear infinite;
+    }
+  }
+
+  @keyframes animation-text {
     0% {
-      transform: translate(-50%, -50%) rotate(0deg);
+      width: 0;
+    }
+    50% {
+      width: 100%;
     }
     100% {
-      transform: translate(-50%, -50%) rotate(360deg);
+      width: 0;
     }
   }
 `;
 
-const SpinnerBlue = styled(Spinner)`
-  transform: translate(-50%, -50%) rotate(180deg);
-  background: transparent;
-  border: none;
-  animation-delay: 0.2s;
-  &::before {
-    width: 100px;
-    height: 100px;
-    border: 8px solid transparent;
-    border-right: 8px solid blue;
-    border-bottom: 8px solid blue;
-    border-radius: 50%;
-  }
-  &::after {
-    content: '';
-    position: absolute;
-    top: 29%;
-    right: 27%;
-    width: 15px;
-    height: 15px;
-    background: blue;
-    border-radius: 50%;
-    box-shadow: 0 0 10px blue;
-  }
+const Logo = styled(LogoBox)`
+  position: absolute;
+  top: 43%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100px;
+  height: 100px;
 `;

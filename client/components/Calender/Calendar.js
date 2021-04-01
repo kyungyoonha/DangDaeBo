@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
+import Loader from '../../components/Loader';
 import { Button } from '../../components/Form';
 import { calendarFunc } from '../../util/calendarFunc';
 import { makeData } from '../../util/fakeData';
@@ -8,9 +9,18 @@ import { makeData } from '../../util/fakeData';
 const Calendar = () => {
   const [year, setYear] = useState(new Date().getFullYear());
   const [month, setMonth] = useState(new Date().getMonth() + 1);
+  const [isFetched, setIsFetched] = useState(false);
 
   const weeks = calendarFunc(year, month - 1);
   const dataObj = makeData(weeks);
+
+  useEffect(() => {
+    if (!isFetched) {
+      setTimeout(() => {
+        setIsFetched(true);
+      }, 1000);
+    }
+  }, [isFetched]);
 
   const onClickPrevButton = () => {
     if (month <= 1) {
@@ -19,6 +29,7 @@ const Calendar = () => {
     } else {
       setMonth((prevMonth) => prevMonth - 1);
     }
+    setIsFetched(false);
   };
 
   const onClickNextButton = () => {
@@ -28,6 +39,7 @@ const Calendar = () => {
     } else {
       setMonth((prevMonth) => prevMonth + 1);
     }
+    setIsFetched(false);
   };
 
   return (
@@ -77,6 +89,7 @@ const Calendar = () => {
           </ul>
         ))}
       </div>
+      {!isFetched && <Loader />}
     </Wrapper>
   );
 };

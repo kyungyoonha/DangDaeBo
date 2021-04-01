@@ -6,7 +6,6 @@ import styled from 'styled-components';
 
 import wrapper from '../store/configureStore';
 import Sidebar from '../components/Sidebar';
-import Loader from '../components/Loader';
 import { LOAD_MY_INFO_REQUEST } from '../reducers/userReducer';
 import { Calendar } from '../components/Calender';
 
@@ -15,7 +14,6 @@ const Home = () => {
     <>
       <Header />
       <Contents>
-        <Loader />
         <Sidebar />
         <Calendar />
       </Contents>
