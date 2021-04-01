@@ -1,13 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const Logo = ({ width }) => {
   return (
     <>
       <Wrapper width={width}>
-        <LogoWrapper>
-          <div className="logoShape" />
-        </LogoWrapper>
+        <div className="logo-wrapper">
+          <LogoBox />
+        </div>
         <Text>
           <p>
             <span>당</span>신은
@@ -24,58 +25,62 @@ const Logo = ({ width }) => {
   );
 };
 
+Logo.propTypes = {
+  width: PropTypes.string,
+};
+
 export default React.memo(Logo);
 
 const Wrapper = styled.div`
   position: relative;
   width: ${(props) => (props.width ? props.width : '200px')};
   height: ${(props) => (props.width ? props.width / 2 : '100px')};
-`;
-const LogoWrapper = styled.div`
-  width: 50%;
-  height: 100%;
-  padding: 1rem;
 
-  .logoShape {
-    position: relative;
-    width: 100%;
+  .logo-wrapper {
+    width: 50%;
     height: 100%;
-    background: blue;
-    border-radius: 50%;
-    box-shadow: 0 0 0 0.3rem #000, 0 0 1rem rgba(0, 0, 0, 0.8), 0 0 1rem rgba(0, 0, 0, 0.8);
-    border: 0.3rem solid #fff;
+    padding: 1rem;
+  }
+`;
 
-    overflow: hidden;
+export const LogoBox = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: blue;
+  border-radius: 50%;
+  box-shadow: 0 0 0 0.3rem #000, 0 0 1rem rgba(0, 0, 0, 0.8), 0 0 1rem rgba(0, 0, 0, 0.8);
+  border: 0.3rem solid #fff;
+  overflow: hidden;
 
-    &::before {
-      content: '';
-      width: 200%;
-      height: 200%;
-      position: absolute;
-      transform: translate(-25%, -75%);
-      border-radius: 40%;
-      background: rgba(255, 20, 255, 0.7);
-      animation: rotateLogo 3s linear infinite;
+  &::before {
+    content: '';
+    width: 200%;
+    height: 200%;
+    position: absolute;
+    transform: translate(-25%, -75%);
+    border-radius: 40%;
+    background: rgba(255, 20, 255, 0.7);
+    animation: rotateLogo 3s linear infinite;
+  }
+
+  &::after {
+    content: '';
+    width: 200%;
+    height: 200%;
+    position: absolute;
+    transform: translate(-25%, -75%);
+    border-radius: 35%;
+    background: rgba(255, 20, 20, 0.8);
+    animation: rotateLogo 3s linear infinite;
+  }
+
+  @keyframes rotateLogo {
+    0% {
+      transform: translate(-25%, -75%) rotate(0deg);
     }
-
-    &::after {
-      content: '';
-      width: 200%;
-      height: 200%;
-      position: absolute;
-      transform: translate(-25%, -75%);
-      border-radius: 35%;
-      background: rgba(255, 20, 20, 0.8);
-      animation: rotateLogo 3s linear infinite;
-    }
-
-    @keyframes rotateLogo {
-      0% {
-        transform: translate(-25%, -75%) rotate(0deg);
-      }
-      100% {
-        transform: translate(-25%, -75%) rotate(360deg);
-      }
+    100% {
+      transform: translate(-25%, -75%) rotate(360deg);
     }
   }
 `;
