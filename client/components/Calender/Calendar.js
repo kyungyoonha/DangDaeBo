@@ -30,7 +30,6 @@ const Calendar = () => {
     }
   };
 
-  console.log(dataObj['2021-04-23']);
   return (
     <Wrapper>
       <div className="cal-header">
@@ -61,7 +60,7 @@ const Calendar = () => {
       <div className="cal-body">
         {weeks.map((week) => (
           <ul>
-            {week.map((item, idx) => (
+            {week.map((item) => (
               <li key={item.day}>
                 <div className="week-day">{item.day}</div>
                 <div className="week-data">
