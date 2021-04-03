@@ -1,12 +1,11 @@
 import React, { useCallback, useEffect } from 'react';
-import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 
 import { Input, Button } from '../components/Form';
-import { Container } from '../components/Layout';
 import useInputs from '../hooks/useInputs';
 import { SIGN_UP_REQUEST } from '../reducers/userReducer';
+import { Wrapper, StyledLogo, Form } from './signin';
 
 const initialValue = {
   name: '',
@@ -47,7 +46,10 @@ const Signup = () => {
   );
 
   return (
-    <Container>
+    <Wrapper>
+      <a className="sign-header" href="/">
+        <StyledLogo />
+      </a>{' '}
       <Form>
         <h1>회원가입</h1>
         <Input
@@ -93,34 +95,17 @@ const Signup = () => {
           error={errors.pwConfirm}
         />
 
-        <Button onClick={onSubmit} color="blue" width="100%">
-          로그인
+        <Button className="round" onClick={onSubmit} color="blue" width="100%" m="20px 0 20px">
+          회원가입
         </Button>
+        <div className="divider" />
+        <div className="sign-footer">
+          이미 회원이신가요?
+          <a href="signin">로그인</a>
+        </div>
       </Form>
-    </Container>
+    </Wrapper>
   );
 };
 
 export default Signup;
-
-const Form = styled.form`
-  margin-top: 80px;
-  border: 1px solid ${(props) => props.theme.gray[0]};
-  border-radius: 1%;
-  height: 700px;
-  padding: 80px 20px;
-
-  h1 {
-    font-weight: 900;
-    text-align: center;
-    margin-bottom: 30px;
-  }
-
-  @media (min-width: 768px) {
-    padding: 80 50px;
-  }
-
-  @media (min-width: 992px) {
-    padding: 80px 100px;
-  }
-`;

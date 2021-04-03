@@ -2,10 +2,10 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 
-const Button = ({ className, type = 'submit', color = 'gray', onClick, children, width }) => {
+const Button = ({ className, type = 'submit', color = 'gray', onClick, children, width, m, p }) => {
   return (
     <>
-      <StyledButton className={className} type={type} onClick={onClick} color={color} width={width}>
+      <StyledButton className={className} type={type} onClick={onClick} color={color} width={width} m={m} p={p}>
         {children}
       </StyledButton>
     </>
@@ -25,35 +25,20 @@ export default React.memo(Button);
 const StyledButton = styled.button`
   padding: 10px;
   border-radius: 4px;
-  border: 1px solid ${(props) => props.theme.gray[0]};
   width: ${(props) => props.width || ''};
+  margin: ${(props) => (props.m ? props.m : '')};
+  padding: ${(props) => (props.p ? props.p : '')};
+  background: ${(props) => (props.color ? props.color : props.theme.gray[0])};
+  color: white;
 
-  ${(props) => {
-    switch (props.color) {
-      case 'green':
-        return css`
-          background: ${props.theme.green[0]};
-          color: white;
-        `;
+  &.outline {
+    background: none;
+    border: 1px solid ${(props) => (props.color ? props.color : props.theme.gray[0])};
+    color: ${(props) => (props.color ? props.color : props.theme.gray[0])};
+    font-size: 700;
+  }
 
-      case 'red':
-        return css`
-          background: ${props.theme.red[0]};
-
-          color: white;
-        `;
-
-      case 'blue':
-        return css`
-          background: ${props.theme.blue[0]};
-          color: white;
-        `;
-
-      default:
-        return css`
-          background: ${props.theme.gray[0]};
-          color: white;
-        `;
-    }
-  }};
+  &.round {
+    border-radius: 30px;
+  }
 `;
