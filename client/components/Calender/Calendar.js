@@ -46,15 +46,15 @@ const Calendar = () => {
     <Wrapper>
       <div className="cal-header">
         <div className="cal-title">
-          <StyledButton onClick={onClickPrevButton}>
+          <Button onClick={onClickPrevButton} m="10px" p="5px 10px">
             <i className="fas fa-angle-left"></i>
-          </StyledButton>
+          </Button>
           <span>
             {year}-{month}
           </span>
-          <StyledButton onClick={onClickNextButton}>
+          <Button onClick={onClickNextButton}>
             <i className="fas fa-angle-right"></i>
-          </StyledButton>
+          </Button>
         </div>
         <div className="week-name">
           <ul>
@@ -196,9 +196,4 @@ const Wrapper = styled.div`
       background: black;
     }
   }
-`;
-
-const StyledButton = styled(Button)`
-  padding: 5px 10px;
-  margin: 10px;
 `;

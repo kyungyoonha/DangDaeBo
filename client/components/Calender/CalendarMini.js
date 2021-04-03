@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import { Button } from '../Form/Index';
+import { Button } from '../Form';
 import { calendarFunc } from '../../util/calendarFunc';
 import { Thead, Weeks } from '.';
 

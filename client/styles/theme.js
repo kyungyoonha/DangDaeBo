@@ -4,7 +4,7 @@ const theme = {
   brown: ['#e5ad87', '#e29f76', '#e08d60'],
   gray: ['#adb5bd', '#868e96', '#343a40'],
   green: ['#37b24d', '#2f9e44', '#2b8a3e'],
-  blue: ['#4290aa'],
+  blue: ['#4290aa', 'blue'],
   red: ['#c92a2a'],
   line: ['#eeeeee', '#dddddd'],
 };

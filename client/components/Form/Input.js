@@ -44,7 +44,7 @@ export default React.memo(Input);
 
 const Wrapper = styled.div`
   position: relative;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   label {
     display: block;
     margin-bottom: 5px;
