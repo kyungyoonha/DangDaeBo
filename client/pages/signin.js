@@ -144,6 +144,7 @@ export const Form = styled.form`
   border-radius: 1%;
   height: 700px;
   padding: 40px 40px;
+  box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.3);
 
   h1 {
     font-weight: 900;
