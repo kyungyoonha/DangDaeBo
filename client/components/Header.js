@@ -33,8 +33,10 @@ const Header = () => {
           <li className={asPath === '/today' ? 'active' : ''}>
             <Link href="/today">오늘의 의인</Link>
           </li>
-          <li className={asPath === '/page2' ? 'active' : ''}>
-            <Link href="/">의인 등록</Link>
+          <li className={asPath === '/form' ? 'active' : ''}>
+            <Link href="/form" form>
+              의인 등록
+            </Link>
           </li>
           <li className={asPath === '/page3' ? 'active' : ''}>
             <Link href="/">소개</Link>

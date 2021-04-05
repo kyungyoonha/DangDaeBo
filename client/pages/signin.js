@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 
-import { Input, Button } from '../components/Form';
+import { SignInput, Button } from '../components/Form';
 import { Container } from '../components/Layout';
 import useInputs from '../hooks/useInputs';
 import { SIGN_IN_REQUEST } from '../reducers/userReducer';
@@ -51,7 +51,7 @@ const Signin = () => {
 
       <Form>
         <h1>로그인</h1>
-        <Input
+        <SignInput
           label="이메일"
           name="email"
           value={inputs.email}
@@ -61,7 +61,7 @@ const Signin = () => {
           error={errors.email}
         />
 
-        <Input
+        <SignInput
           label="비밀번호"
           name="pw"
           type="password"
