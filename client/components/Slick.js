@@ -51,14 +51,14 @@ const Slick = () => {
     setScrollCtrl({ ...scrollCtrl, isScrolling: false });
   };
   return (
-    <Wrapper itemMargin={itemMargin}>
+    <Wrapper>
       <div className="items" ref={itemsEL} onMouseDown={onMouseDown} onMouseUp={onMouseUp} onMouseMove={onMouseMove}>
         {dummy.slice(0, 10).map((item, idx) => (
           <div
             key={idx}
             className={`item${startIndex + idx === 0 ? ' center' : ''}`}
             style={{
-              transform: `translateX(${scrollX}px) scale(${1.3 - 0.1 * Math.abs(startIndex + idx)})`,
+              transform: `translateX(${scrollX}px) scale(${1.4 - 0.1 * Math.abs(startIndex + idx)})`,
               zIndex: itemNum - Math.abs(startIndex + idx) || 1,
               marginRight: itemMargin - Math.abs(startIndex + idx) * 1.1,
             }}>
@@ -69,6 +69,13 @@ const Slick = () => {
             </div>
           </div>
         ))}
+      </div>
+      <div className="slick-dots">
+        <ul>
+          {[...new Array(itemNum)].map((_, idx) => (
+            <li key={idx} className={`${startIndex + idx === 0 ? ' active' : ''}`} />
+          ))}
+        </ul>
       </div>
     </Wrapper>
   );
@@ -90,7 +97,7 @@ const Wrapper = styled.div`
     display: flex;
     flex-wrap: nowrap;
     overflow: hidden;
-    padding: 70px 0;
+    padding: 110px 0;
     background: none;
   }
 
@@ -101,8 +108,8 @@ const Wrapper = styled.div`
     background: #fff;
     margin-right: ${(props) => props.itemMargin + 'px' || ''};
     transition: transform 0.2s ease;
-    box-shadow: 20px 0 10px rgba(0, 0, 0, 0.3), 30px 0 10px rgba(0, 0, 0, 0.2), -20px 0 10px rgba(0, 0, 0, 0.3),
-      -30px 0 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 10px 0 10px rgba(0, 0, 0, 0.4), 20px 0 7px rgba(0, 0, 0, 0.3), 30px 0 5px rgba(0, 0, 0, 0.2),
+      -10px 0 10px rgba(0, 0, 0, 0.4), -20px 0 7px rgba(0, 0, 0, 0.3), -30px 0 5px rgba(0, 0, 0, 0.2);
     img {
       width: 100%;
       height: 280px;
@@ -115,6 +122,27 @@ const Wrapper = styled.div`
 
     h2 {
       font-weight: 700;
+    }
+  }
+
+  .slick-dots {
+    margin-top: 100px;
+    text-align: center;
+    ul {
+      display: inline-block;
+      margin: 0 auto;
+    }
+    li {
+      width: 15px;
+      height: 15px;
+      background: #000;
+      border-radius: 50%;
+      float: left;
+      margin-right: 5px;
+    }
+
+    li.active {
+      background: #fff;
     }
   }
 `;
