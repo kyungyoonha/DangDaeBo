@@ -4,7 +4,9 @@ import styled from 'styled-components';
 import useInputs from '../../hooks/useInputs';
 import { Input } from '../Form';
 
-const initialState = {};
+const initialState = {
+  name: '',
+};
 
 const FormSectionBasic = () => {
   const { inputs, errors, onChange } = useInputs(initialState);
@@ -12,11 +14,38 @@ const FormSectionBasic = () => {
   return (
     <Wrapper>
       <Input
-        label="이름을 입력해주세요."
-        description="카톡연결을 위해 한국번호를 '-' 없이 작성해주세요 (투어 컨펌을 위하여 정확하게 기입해주세요.)"
+        label="성함"
+        description="※ 정확한 정보 확인을 위해 실명으로 입력해주세요."
         name="name"
         value={inputs.name}
-        placeholder="이메일를 입력해주세요"
+        required
+        onChange={onChange}
+        error={errors.name}
+      />
+      <Input
+        label="성함"
+        description="※ 정확한 정보 확인을 위해 실명으로 입력해주세요."
+        placeholder="fewfwefwefwefwewefwefewfwefwefewfew"
+        name="name"
+        value={inputs.name}
+        required
+        onChange={onChange}
+        error={errors.name}
+      />
+      <Input
+        label="성함"
+        description="※ 정확한 정보 확인을 위해 실명으로 입력해주세요."
+        name="name"
+        value={inputs.name}
+        required
+        onChange={onChange}
+        error={errors.name}
+      />
+      <Input
+        label="성함"
+        description="※ 정확한 정보 확인을 위해 실명으로 입력해주세요."
+        name="name"
+        value={inputs.name}
         required
         onChange={onChange}
         error={errors.name}
