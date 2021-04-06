@@ -86,11 +86,14 @@ export default React.memo(Slick);
 const Wrapper = styled.div`
   width: 100%;
   overflow: hidden;
-  padding: 150px 30px;
-  height: 100vh;
+  padding: 50px 30px;
+  height: calc(100vh - 100px);
   cursor: grab;
   perspective: 1200px;
   background: #212121;
+  color: #000;
+  background: #212121;
+  color: #fff;
 
   .items {
     transform-style: preserve-3d;
