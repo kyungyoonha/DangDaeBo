@@ -2,7 +2,7 @@ import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 
-import { Input, Button } from '../components/Form';
+import { SignInput, Button } from '../components/Form';
 import useInputs from '../hooks/useInputs';
 import { SIGN_UP_REQUEST } from '../reducers/userReducer';
 import { Wrapper, StyledLogo, Form } from './signin';
@@ -52,7 +52,7 @@ const Signup = () => {
       </a>{' '}
       <Form>
         <h1>회원가입</h1>
-        <Input
+        <SignInput
           label="이름"
           name="name"
           value={inputs.name}
@@ -62,7 +62,7 @@ const Signup = () => {
           error={errors.name}
         />
 
-        <Input
+        <SignInput
           label="이메일"
           name="email"
           type="email"
@@ -73,7 +73,7 @@ const Signup = () => {
           error={errors.email}
         />
 
-        <Input
+        <SignInput
           label="비밀번호"
           name="pw"
           type="password"
@@ -84,7 +84,7 @@ const Signup = () => {
           error={errors.pw}
         />
 
-        <Input
+        <SignInput
           label="비밀번호 체크"
           name="pwConfirm"
           type="password"
