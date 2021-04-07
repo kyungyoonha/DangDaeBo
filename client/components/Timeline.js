@@ -12,14 +12,40 @@ const Timeline = () => {
         <li>1981 ~ 1990</li>
       </ul>
       <div className="timeline-body">
-        <ul>
-          <li>＊ 1</li>
-          <li>＊ 2</li>
-          <li>＊ 3</li>
-          <li>＊ 4</li>
-          <li>＊ 5</li>
-          <li>＊ 6</li>
-        </ul>
+        <TimelineItem className="item">
+          <h1>제목</h1>
+          <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+          </ul>
+        </TimelineItem>
+        <TimelineItem className="item">
+          <h1>제목</h1>
+          <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+          </ul>
+        </TimelineItem>
+        <TimelineItem className="item">
+          <h1>제목</h1>
+          <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+          </ul>
+        </TimelineItem>
+        <div style={{ clear: 'both' }}></div>
       </div>
     </Wrapper>
   );
@@ -39,6 +65,7 @@ const Wrapper = styled.div`
     li {
       flex: 1;
       border-left: 1px solid ${(props) => props.theme.gray[1]};
+      margin: 0;
     }
 
     li:last-child {
@@ -51,14 +78,40 @@ const Wrapper = styled.div`
   }
 
   .timeline-body {
+    position: relative;
     width: 100%;
-    height: 300px;
     border: 1px solid red;
     margin-top: 70px;
     padding-top: 30px;
 
-    ul li {
-      margin-left: 30px;
+    &::before {
+      content: '';
+      position: absolute;
+      width: 4px;
+      height: 100%;
+      top: 0;
+      left: 50%;
+      background: #f0f;
     }
   }
+
+  ul li {
+    margin-left: 30px;
+  }
+
+  .item:nth-child(odd) {
+    float: left;
+    clear: both;
+    text-align: right;
+  }
+
+  .item:nth-child(even) {
+    float: right;
+    clear: both;
+  }
+`;
+
+const TimelineItem = styled.div`
+  border: 1px solid green;
+  width: 50%;
 `;
