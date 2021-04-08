@@ -1,17 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-const imgList = [
-  'https://www.kyentertainment.kr/theme/theme/img/bg_homeArea1.jpg',
-  'https://www.kyentertainment.kr/theme/theme/img/bg_homeArea2.jpg',
-  'https://www.kyentertainment.kr/theme/theme/img/bg_homeArea3.jpg',
-  'https://www.kyentertainment.kr/theme/theme/img/bg_homeArea4.jpg',
-  'https://www.kyentertainment.kr/theme/theme/img/bg_homeArea5.jpg',
-  'https://www.kyentertainment.kr/theme/theme/img/bg_homeArea6.jpg',
-];
-
-// useEffect + setTimeout();
-//
+import imgList from '../config/imgList.json';
 
 const SlickInfo = () => {
   const [imgIdx, setImgIdx] = useState(0);
@@ -25,8 +15,14 @@ const SlickInfo = () => {
   }, []);
   return (
     <Wrapper>
-      {imgList.map((url, idx) => (
-        <Background key={idx} className={idx === imgIdx ? 'active' : 'hide'} url={url} />
+      {imgList.map((item, idx) => (
+        <>
+          <Background key={idx} className={idx === imgIdx ? 'active' : 'hide'} url={item.url} />
+          <div className="slickinfo-text" style={{ display: idx === imgIdx ? 'block' : 'none' }}>
+            <h2>{item.title}</h2>
+            <p>{item.subTitle}</p>
+          </div>
+        </>
       ))}
     </Wrapper>
   );
@@ -38,6 +34,50 @@ const Wrapper = styled.div`
   width: 100%;
   height: 500px;
   overflow: hidden;
+
+  .slickinfo-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+    height: 300px;
+    border: 1px solid ${(props) => props.theme.gray[0]};
+    text-align: center;
+    color: white;
+    padding-top: 90px;
+    h2 {
+      font-size: 3rem;
+      font-weight: 700;
+    }
+    p {
+      font-size: 1.7rem;
+      font-weight: 100;
+      color: ${(props) => props.theme.gray[0]};
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: -3px;
+      left: -3px;
+      width: 20px;
+      height: 20px;
+      border-top: 6px solid #fff;
+      border-left: 6px solid #fff;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      right: -3px;
+      width: 20px;
+      height: 20px;
+      border-bottom: 6px solid #fff;
+      border-right: 6px solid #fff;
+    }
+  }
 `;
 
 const Background = styled.div`
@@ -49,26 +89,22 @@ const Background = styled.div`
   background: ${(props) => `url(${props.url})`};
   background-size: cover;
   background-position: center;
-  transform: scale(1);
-  animation: animate-slick-bg 4s ease paused forwards;
   opacity: 0;
 
   &.active {
     opacity: 1;
-    animation-play-state: running;
+    animation: animate-slick-bg 4s ease forwards;
   }
 
   &.hide {
     opacity: 0;
+    animation: none;
   }
 
   @keyframes animate-slick-bg {
     0% {
-      transform: scale(1.2);
+      transform: scale(1.4);
     }
-    /* 50% {
-      transform: scale(1);
-    } */
     100% {
       transform: scale(1);
     }
