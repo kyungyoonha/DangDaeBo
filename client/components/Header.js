@@ -38,8 +38,8 @@ const Header = () => {
               의인 등록
             </Link>
           </li>
-          <li className={asPath === '/page3' ? 'active' : ''}>
-            <Link href="/">소개</Link>
+          <li className={asPath === '/info' ? 'active' : ''}>
+            <Link href="/info">소개</Link>
           </li>
         </ul>
       </StyledRow>
