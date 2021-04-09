@@ -112,6 +112,9 @@ const Wrapper = styled.div`
     height: 50px;
     text-align: center;
     background: #03c75a;
+    span {
+      margin-right: 10px;
+    }
   }
 
   .week-name {
