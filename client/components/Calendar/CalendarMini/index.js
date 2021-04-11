@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import router from 'next/router';
 
 import { Button } from '../../Form';
-import { calendarFunc, checkTodayActiveRow } from '../../../util/calendarFunc';
+import { calendarFunc, changeDataFormat, checkTodayActiveRow } from '../../../util/calendarFunc';
 import Weeks from './Weeks';
 
 const WeeksList = ['일', '월', '화', '수', '목', '금', '토'];
@@ -12,13 +12,15 @@ const CalendarMini = () => {
   const [year, setYear] = useState(new Date().getFullYear());
   const [month, setMonth] = useState(new Date().getMonth() + 1);
   const [date, setDate] = useState(new Date().getDate());
-  const [dateKey, setDateKey] = useState(router.asPath.replace('/#', '') || `${year}-${month}-${date}`);
+  const [dateKey, setDateKey] = useState('2021-01-01');
 
   const weeks = calendarFunc(year, month - 1);
   const activeRow = checkTodayActiveRow(weeks, dateKey);
 
   useEffect(() => {
-    setDateKey(router.asPath.replace('/#', ''));
+    setDateKey(
+      router.asPath.indexOf('#') > -1 ? router.asPath.replace('/#', '') : changeDataFormat(year, month - 1, date)
+    );
   }, []);
 
   const onClickPrevButton = () => {
