@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { CalendarMini } from './Calender';
+
+import { CalendarMini } from './Calendar';
 
 const Sidebar = () => {
   return (

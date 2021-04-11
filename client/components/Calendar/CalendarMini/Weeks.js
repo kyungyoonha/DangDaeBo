@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { changeDataFormat } from '../../util/calendarFunc';
+import { changeDataFormat } from '../../../util/calendarFunc';
 
 const Weeks = ({ week }) => {
   const today = new Date();

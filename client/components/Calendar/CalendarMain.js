@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-import Loader from '../../components/Loader';
-import { Button } from '../../components/Form';
+import Loader from '../Loader';
+import { Button } from '../Form';
 import { calendarFunc } from '../../util/calendarFunc';
 import { makeData } from '../../util/fakeData';
 
@@ -13,7 +13,6 @@ const Calendar = () => {
 
   const weeks = calendarFunc(year, month - 1);
   const dataObj = makeData(weeks);
-
   useEffect(() => {
     if (!isFetched) {
       setTimeout(() => {
@@ -45,7 +44,7 @@ const Calendar = () => {
   return (
     <Wrapper>
       <div className="cal-header">
-        <div className="cal-title">
+        <div className="cal-header-title">
           <Button onClick={onClickPrevButton} m="10px" p="5px 10px">
             <i className="fas fa-angle-left"></i>
           </Button>
@@ -56,7 +55,7 @@ const Calendar = () => {
             <i className="fas fa-angle-right"></i>
           </Button>
         </div>
-        <div className="week-name">
+        <div className="cal-header-week">
           <ul>
             <li>일</li>
             <li>월</li>
@@ -70,12 +69,12 @@ const Calendar = () => {
       </div>
 
       <div className="cal-body">
-        {weeks.map((week) => (
-          <ul>
+        {weeks.map((week, idx) => (
+          <ul key={idx}>
             {week.map((item) => (
-              <li key={item.day}>
-                <div className="week-day">{item.day}</div>
-                <div className="week-data">
+              <li key={item.key} id={item.key}>
+                <div className="cal-body-day">{item.day}</div>
+                <div className="cal-body-data">
                   {dataObj[item.key] &&
                     dataObj[item.key].map((data) => (
                       <p key={data.key}>
@@ -98,17 +97,12 @@ export default Calendar;
 
 const Wrapper = styled.div`
   flex: 1;
-  position: relative;
-  overflow: scroll;
 
   .cal-header {
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0px;
     width: 100%;
   }
 
-  .cal-title {
+  .cal-header-title {
     height: 50px;
     text-align: center;
     background: #03c75a;
@@ -117,11 +111,12 @@ const Wrapper = styled.div`
     }
   }
 
-  .week-name {
+  .cal-header-week {
     ul {
       border: 0px solid ${(props) => props.theme.line[1]};
       border-width: 0 0 1px 1px;
       overflow: hidden;
+      position: relative;
     }
     ul li {
       float: left;
@@ -145,6 +140,11 @@ const Wrapper = styled.div`
   }
 
   .cal-body {
+    position: relative;
+    height: calc(100% - 75px);
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+
     ul {
       border: 1px solid ${(props) => props.theme.line[1]};
       border-width: 0 0 1px 1px;
@@ -165,20 +165,19 @@ const Wrapper = styled.div`
       color: skyblue;
     }
   }
-
-  .week-day {
+  .cal-body-day {
+    position: sticky;
     background: ${(props) => props.theme.line[0]};
     text-align: center;
-    top: 0px;
   }
 
-  .week-data {
+  .cal-body-data {
     min-height: 500px;
     padding-left: 7px;
     padding-top: 10px;
   }
 
-  .week-data span {
+  .cal-body-data span {
     background-color: #428fd7;
     border-radius: 5px;
     font-size: 0.9rem;

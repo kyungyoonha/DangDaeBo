@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import { Button } from '../Form';
-import { calendarFunc } from '../../util/calendarFunc';
-import { Thead, Weeks } from '.';
+import { Button } from '../../Form';
+import { calendarFunc } from '../../../util/calendarFunc';
+import Weeks from './Weeks';
+
+const WeeksList = ['일', '월', '화', '수', '목', '금', '토'];
 
 const CalendarMini = () => {
   const [year, setYear] = useState(new Date().getFullYear());
@@ -31,7 +33,7 @@ const CalendarMini = () => {
 
   return (
     <Wrapper>
-      <div className="calendar-header">
+      <div className="calmini-header">
         <Button onClick={onClickPrevButton}>
           <i className="fas fa-angle-left"></i>
         </Button>
@@ -43,7 +45,15 @@ const CalendarMini = () => {
         </Button>
       </div>
       <StyledTable>
-        <Thead />
+        <thead>
+          <tr>
+            {WeeksList.map((weekName) => (
+              <th className="calmini-header-th" key={weekName}>
+                {weekName}
+              </th>
+            ))}
+          </tr>
+        </thead>
         <tbody>
           {weeks.map((week, idx) => (
             <Weeks key={idx} week={week} />
@@ -57,7 +67,7 @@ const CalendarMini = () => {
 export default React.memo(CalendarMini);
 
 const Wrapper = styled.div`
-  .calendar-header {
+  .calmini-header {
     position: relative;
     text-align: center;
     width: 100%;
@@ -80,12 +90,16 @@ const StyledTable = styled.table`
   background: #fff;
   color: #000;
   border-radius: 5px;
-  /* box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7); */
   margin-bottom: 30px;
   border: 1px solid ${(props) => props.theme.line[1]};
   padding: 10px 0 15px;
 
   tr {
     border: 1px solid ${(props) => props.theme.line[0]};
+  }
+
+  .calmini-header-th {
+    margin: 15px auto;
+    border-bottom: 2px solid ${(props) => props.theme.gray[1]};
   }
 `;

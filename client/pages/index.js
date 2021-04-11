@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import wrapper from '../store/configureStore';
 import Sidebar from '../components/Sidebar';
 import { LOAD_MY_INFO_REQUEST } from '../reducers/userReducer';
-import { Calendar } from '../components/Calender';
+import { CalendarMain } from '../components/Calendar';
 
 const Home = () => {
   return (
@@ -15,7 +15,7 @@ const Home = () => {
       <Header />
       <Contents>
         <Sidebar />
-        <Calendar />
+        <CalendarMain />
       </Contents>
     </>
   );
