@@ -1,21 +1,27 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
-import { changeDataFormat } from '../../../util/calendarFunc';
-
-const Weeks = ({ week }) => {
-  const today = new Date();
-  const todayKey = changeDataFormat(today.getFullYear(), today.getMonth(), today.getDate());
-
+const Weeks = ({ week, isActive, dateKey, onClick }) => {
   return (
-    <WrapperTr>
+    <WrapperTr className={isActive ? 'active' : ''}>
       {week.map((item, i) => (
-        <td className={`${item.isGray ? 'gray' : ''} ${todayKey === item.key ? ' today' : ''}`} key={i}>
-          {item.day}
+        <td
+          className={`${item.isGray ? 'gray' : ''} ${item.key === dateKey ? ' today' : ''}`}
+          key={i}
+          onClick={() => onClick(item.key)}>
+          <a href={'#' + item.key}>{item.day}</a>
         </td>
       ))}
     </WrapperTr>
   );
+};
+
+Weeks.propTypes = {
+  week: PropTypes.array,
+  isAtive: PropTypes.bool,
+  dateKey: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 export default React.memo(Weeks);
@@ -26,18 +32,31 @@ const WrapperTr = styled.tr`
   border-bottom: 1px solid ${(props) => props.theme.line[0]};
   text-align: center;
   color: ${(props) => props.theme.gray[2]};
+  position: relative;
+
+  &.active {
+    background: #ffc0cb9e;
+    a {
+      color: white;
+    }
+    color: white;
+  }
   li {
     float: left;
     padding: 0 10px;
   }
-
-  td.gray {
+  td {
+    margin: 0;
+    padding: 0 !important;
+    border-collapse: collapse;
+  }
+  td.gray a {
     color: ${(props) => props.theme.gray[0]};
   }
 
-  td.today {
-    background: pink;
-    color: white;
-    border-radius: 50%;
+  td.today a {
+    display: block;
+    color: #000;
+    font-weight: 600;
   }
 `;

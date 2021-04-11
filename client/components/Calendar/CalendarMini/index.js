@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
+import router from 'next/router';
 
 import { Button } from '../../Form';
-import { calendarFunc } from '../../../util/calendarFunc';
+import { calendarFunc, checkTodayActiveRow } from '../../../util/calendarFunc';
 import Weeks from './Weeks';
 
 const WeeksList = ['일', '월', '화', '수', '목', '금', '토'];
@@ -10,8 +11,15 @@ const WeeksList = ['일', '월', '화', '수', '목', '금', '토'];
 const CalendarMini = () => {
   const [year, setYear] = useState(new Date().getFullYear());
   const [month, setMonth] = useState(new Date().getMonth() + 1);
+  const [date, setDate] = useState(new Date().getDate());
+  const [dateKey, setDateKey] = useState(router.asPath.replace('/#', '') || `${year}-${month}-${date}`);
 
   const weeks = calendarFunc(year, month - 1);
+  const activeRow = checkTodayActiveRow(weeks, dateKey);
+
+  useEffect(() => {
+    setDateKey(router.asPath.replace('/#', ''));
+  }, []);
 
   const onClickPrevButton = () => {
     if (month <= 1) {
@@ -30,6 +38,10 @@ const CalendarMini = () => {
       setMonth((prevMonth) => prevMonth + 1);
     }
   };
+
+  const onClickDate = useCallback((key) => {
+    setDateKey(key);
+  }, []);
 
   return (
     <Wrapper>
@@ -56,7 +68,7 @@ const CalendarMini = () => {
         </thead>
         <tbody>
           {weeks.map((week, idx) => (
-            <Weeks key={idx} week={week} />
+            <Weeks key={idx} week={week} isActive={idx === activeRow} dateKey={dateKey} onClick={onClickDate} />
           ))}
         </tbody>
       </StyledTable>

@@ -77,7 +77,7 @@ const Calendar = () => {
                 <div className="cal-body-data">
                   {dataObj[item.key] &&
                     dataObj[item.key].map((data) => (
-                      <p key={data.key}>
+                      <p key={data.id}>
                         <span value={data.category}>{data.category}</span>
                         {data.name}
                       </p>

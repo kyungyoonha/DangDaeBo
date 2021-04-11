@@ -98,3 +98,17 @@ export const changeDataFormat = (year, month, date) => {
 
   return `${year}-${monthString}-${dateString}`;
 };
+
+export const checkTodayActiveRow = (weeks, key) => {
+  let result = -1;
+  for (let i = 0; i < weeks.length; i++) {
+    for (let j = 0; j < weeks[i].length; j++) {
+      if (weeks[i][j].key === key) {
+        result = i;
+        break;
+      }
+    }
+  }
+
+  return result;
+};
