@@ -24,7 +24,7 @@ const App = ({ Component }) => {
         {/* <meta property="og:site_name" content="..." /> */}
         {/* 웹페이지 설명(제목 아래에 표시) */}
         {/* <meta property="og:description" content="..." /> */}
-        <title>당대보 | 당신은 대한민국의 보배입니다.</title>
+        <title>당대보 | 당신은 대한민국의 영웅입니다.</title>
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link
           href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap"

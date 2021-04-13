@@ -7,7 +7,7 @@ const Sidebar = () => {
   return (
     <Wrapper>
       <CalendarMini />
-      <p>당신은 대한민국의 보배입니다.</p>
+      <p>당신은 대한민국의 영웅입니다.</p>
       <h1>이곳은 대한민국의 의인들을 기억하기 위한 곳입니다.🌺</h1>
       <h3>Ea non cupidatat quis sunt velit amet Lorem sint veniam.</h3>
       <p>

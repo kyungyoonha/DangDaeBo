@@ -28,14 +28,14 @@ const Header = () => {
       <StyledRow show="m" width="calc(80% - 170px)">
         <ul>
           <li className={asPath === '/' ? 'active' : ''}>
-            <Link href="/">기억하자</Link>
+            <Link href="/">이번달 영웅</Link>
           </li>
           <li className={asPath === '/today' ? 'active' : ''}>
-            <Link href="/today">오늘의 의인</Link>
+            <Link href="/today">오늘의 영웅</Link>
           </li>
           <li className={asPath === '/form' ? 'active' : ''}>
             <Link href="/form" form>
-              의인 등록
+              영웅 등록
             </Link>
           </li>
           <li className={asPath === '/info' ? 'active' : ''}>
