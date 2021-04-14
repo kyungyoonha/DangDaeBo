@@ -1,10 +1,7 @@
 ## TODO
 
 - 달력 year / Month select
-
-## RETRY
-
-- position: sticky: week-day에 적용
+- ProgressBar => end-point 캐릭터로 변경
 
 ## 에러해결
 

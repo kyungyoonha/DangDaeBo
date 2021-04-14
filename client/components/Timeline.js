@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
+import ProgressBar from './ProgressBar';
+
 const dummyData = [
   [
     {
@@ -91,8 +93,7 @@ const Timeline = () => {
   return (
     <Wrapper onScroll={onScroll}>
       <div className="timeline-header">
-        <h2>진행정도</h2>
-        <ProgressBar percent={percent} />
+        <ProgressBar title="진행정도" percent={percent} />
       </div>
       <div className="timeline-body">
         {dummyData.map((yearList, idx) => {
@@ -120,7 +121,6 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   overflow-x: scroll;
-  border: 1px solid red;
   position: relative;
 
   .timeline-header {
@@ -128,7 +128,6 @@ const Wrapper = styled.div`
     left: 0;
     width: 100%;
     padding: 40px 30px;
-    border: 1px solid blue;
   }
 
   .timeline-body {
@@ -138,25 +137,6 @@ const Wrapper = styled.div`
     .item {
       flex-shrink: 0;
     }
-  }
-`;
-
-const ProgressBar = styled.div`
-  width: 100%;
-  height: 20px;
-  border: 1px solid ${(props) => props.theme.gray[1]};
-  border-radius: 10px;
-  overflow: hidden;
-  position: relative;
-
-  &::before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 20px;
-    background: linear-gradient(to right, blue, red);
-    transform: ${(props) => `translateX(${-(100 - props.percent)}%)`};
-    transition: 0.3s;
   }
 `;
 
