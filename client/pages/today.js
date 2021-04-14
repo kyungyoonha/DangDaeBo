@@ -2,32 +2,26 @@ import React from 'react';
 import styled from 'styled-components';
 
 import Header from '../components/Header';
-import Slick from '../components/Slick';
 import Timeline from '../components/Timeline';
-import { Container } from '../components/Layout';
+import Sidebar from '../components/Sidebar';
+import Slick from '../components/Slick';
 
 const Today = () => {
   return (
     <>
       <Header />
-      <Wrapper>
-        <p className="today-title">2021-04-06</p>
-        <Slick />
-        <Container>
-          <Timeline />
-        </Container>
-      </Wrapper>
+      <Contents>
+        <Sidebar />
+        <Timeline />
+      </Contents>
     </>
   );
 };
 
 export default Today;
 
-const Wrapper = styled.div`
-  .today-title {
-    text-align: center;
-    padding-top: 50px;
-    font-size: 2rem;
-    font-weight: 700;
-  }
+const Contents = styled.div`
+  height: calc(100vh - 100px);
+  display: flex;
+  align-items: stretch;
 `;
