@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 
 import Loader from '../Loader';
 import { Button } from '../Form';
 import { calendarFunc } from '../../util/calendarFunc';
 import { makeData } from '../../util/fakeData';
+import { ModalHero } from '../../components/Modal';
 
-const Calendar = () => {
+const CalendarMain = () => {
   const [year, setYear] = useState(new Date().getFullYear());
   const [month, setMonth] = useState(new Date().getMonth() + 1);
   const [isFetched, setIsFetched] = useState(false);
+  const [modal, setModal] = useState('');
 
   const weeks = calendarFunc(year, month - 1);
   const dataObj = makeData(weeks);
@@ -40,6 +42,9 @@ const Calendar = () => {
     }
     setIsFetched(false);
   };
+
+  const onOpenModal = (id) => setModal(id);
+  const onCloseModal = useCallback(() => setModal(''), []);
 
   return (
     <Wrapper>
@@ -77,7 +82,7 @@ const Calendar = () => {
                 <div className="cal-body-data">
                   {dataObj[item.key] &&
                     dataObj[item.key].map((data) => (
-                      <p key={data.id}>
+                      <p key={data.id} onClick={() => onOpenModal(data.id)}>
                         <span value={data.category}>{data.category}</span>
                         {data.name}
                       </p>
@@ -89,11 +94,12 @@ const Calendar = () => {
         ))}
       </div>
       {!isFetched && <Loader />}
+      {modal && <ModalHero id={modal} onCloseModal={onCloseModal} />}
     </Wrapper>
   );
 };
 
-export default Calendar;
+export default CalendarMain;
 
 const Wrapper = styled.div`
   flex: 1;
@@ -175,6 +181,10 @@ const Wrapper = styled.div`
     min-height: 500px;
     padding-left: 7px;
     padding-top: 10px;
+  }
+
+  .car-body-data p {
+    cursor: pointer;
   }
 
   .cal-body-data span {
