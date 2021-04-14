@@ -36,6 +36,7 @@ const Wrapper = styled.div`
     background: #fff;
     box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.7);
     border-radius: 50%;
+    transition: 0.3s;
   }
 `;
 

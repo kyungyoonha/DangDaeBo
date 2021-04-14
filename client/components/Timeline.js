@@ -98,14 +98,15 @@ const Timeline = () => {
       <div className="timeline-body">
         {dummyData.map((yearList, idx) => {
           return yearList.map((item, itemIdx) => (
-            <TimelineItem className="item" key={`${idx}${itemIdx}`}>
-              <h1>{new Date().getFullYear() - idx}년</h1>
-              <ul>
-                <li>{item.name}</li>
-                <li>{item.date}</li>
-                <li>{item.location}</li>
-                <li>{item.category}</li>
-              </ul>
+            <TimelineItem key={`${idx}${itemIdx}`}>
+              <h1 className="">{new Date().getFullYear() - idx}년</h1>
+              <div className="card">
+                <img src={item.url} alt="" />
+                <div className="item-content">
+                  <h2>{item.name}</h2>
+                  <p>{item.date}</p>
+                </div>
+              </div>
             </TimelineItem>
           ));
         })}
@@ -134,13 +135,36 @@ const Wrapper = styled.div`
     width: 100%;
     display: flex;
     flex: 1;
-    .item {
-      flex-shrink: 0;
-    }
   }
 `;
 
 const TimelineItem = styled.div`
-  border: 1px solid green;
-  width: 1200px;
+  flex-shrink: 0;
+  position: relative;
+  width: 500px;
+  text-align: center;
+
+  .card {
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 420px;
+    height: 500px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
+  }
+  .card img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+  }
+
+  .card .item-content {
+    padding-top: 10px;
+    text-align: center;
+
+    h2 {
+      font-weight: 700;
+    }
+  }
 `;

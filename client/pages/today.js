@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Header from '../components/Header';
 import Timeline from '../components/Timeline';
 import Sidebar from '../components/Sidebar';
+import Slick from '../components/Slick';
 
 const Today = () => {
   return (
