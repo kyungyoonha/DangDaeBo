@@ -4,11 +4,13 @@ import PropTypes from 'prop-types';
 
 import { Container } from '../Layout';
 
-const ModalLayout = ({ className, children }) => {
+const ModalLayout = ({ className, w = '600px', onCloseModal, children }) => {
   return (
-    <Wrapper className={className}>
+    <Wrapper className={className} onClick={onCloseModal}>
       <Container>
-        <div className="modal-box">{children}</div>
+        <div className="modal-box" onClick={(e) => e.stopPropagation()} style={{ width: w }}>
+          {children}
+        </div>
       </Container>
     </Wrapper>
   );
@@ -16,6 +18,7 @@ const ModalLayout = ({ className, children }) => {
 
 ModalLayout.propTypes = {
   className: PropTypes.string,
+  onCloseModal: PropTypes.func.isRequired,
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
 };
 
@@ -35,8 +38,6 @@ const Wrapper = styled.div`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 600px;
-    height: 700px;
     background: #fff;
   }
 `;
