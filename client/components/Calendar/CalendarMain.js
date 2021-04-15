@@ -94,7 +94,7 @@ const CalendarMain = () => {
         ))}
       </div>
       {!isFetched && <Loader />}
-      {modal && <ModalHero id={modal} onCloseModal={onCloseModal} />}
+      {!modal && <ModalHero id={modal} onCloseModal={onCloseModal} />}
     </Wrapper>
   );
 };
@@ -118,6 +118,7 @@ const Wrapper = styled.div`
   }
 
   .cal-header-week {
+    overflow-y: scroll;
     ul {
       border: 0px solid ${(props) => props.theme.line[1]};
       border-width: 0 0 1px 1px;

@@ -15,10 +15,62 @@ const dummyData = {
 
 const ModalHero = ({ id, onCloseModal }) => {
   return (
-    <ModalLayout onCloseModal={onCloseModal} w="1200px">
+    <ModalLayout onCloseModal={onCloseModal}>
       <Wrapper>
-        <div className="modal-header"></div>
-        <div className="modal-body"></div>
+        <div className="modal-header">
+          <img src={dummyData.url} />
+
+          <div className="contents">
+            <div className="info">
+              <h2>{dummyData.name}</h2>
+              <p>Sunt sint ex Lorem ut cillum ut laboris magna do est.</p>
+            </div>
+            <div className="statistics">
+              <span label="좋아요">50</span>
+              <span label="댓글 수">100</span>
+              <span label="즐겨찾기">10</span>
+            </div>
+            <div className="buttons">
+              <button>좋아요</button>
+              <button>댓글달기</button>
+              <button>즐겨찾기</button>
+            </div>
+          </div>
+        </div>
+        <div className="modal-body">
+          <div className="section">
+            <h2>1. 상세내용1</h2>
+            <p>
+              Deserunt eu in fugiat consequat tempor officia ut nostrud. Qui aliqua exercitation ut deserunt non aute
+              est elit id dolor. Eiusmod adipisicing Lorem fugiat exercitation id quis Lorem elit eu esse cupidatat
+              consequat Lorem veniam. Sit pariatur pariatur elit amet irure. Nisi ad anim sunt excepteur nostrud minim
+              ullamco incididunt. Sit nostrud sint duis consectetur non dolor ad excepteur aute veniam labore labore ex
+              enim. Dolor aliquip deserunt deserunt nisi labore aliquip amet sit aute aliquip aliqua. Sunt ut culpa
+              irure qui quis. Incididunt eiusmod velit fugiat adipisicing in eu pariatur. Incididunt eu reprehenderit
+              elit esse deserunt duis mollit fugiat exercitation. Tempor aliquip sit non pariatur incididunt ad eu
+              ullamco amet anim exercitation eiusmod est. Sint ullamco sit deserunt et nisi ullamco Lorem. Occaecat esse
+              ut nulla eu veniam dolor proident sunt nisi in. Nulla qui veniam veniam nisi ipsum quis cupidatat esse
+              culpa. Aute ut incididunt dolor amet non sunt adipisicing.
+            </p>
+            <button>글 수정 요청</button>
+          </div>
+          <div className="section">
+            <h2>2. 상세내용1</h2>
+            <p>
+              Deserunt eu in fugiat consequat tempor officia ut nostrud. Qui aliqua exercitation ut deserunt non aute
+              est elit id dolor. Eiusmod adipisicing Lorem fugiat exercitation id quis Lorem elit eu esse cupidatat
+              consequat Lorem veniam. Sit pariatur pariatur elit amet irure. Nisi ad anim sunt excepteur nostrud minim
+              ullamco incididunt. Sit nostrud sint duis consectetur non dolor ad excepteur aute veniam labore labore ex
+              enim. Dolor aliquip deserunt deserunt nisi labore aliquip amet sit aute aliquip aliqua. Sunt ut culpa
+              irure qui quis. Incididunt eiusmod velit fugiat adipisicing in eu pariatur. Incididunt eu reprehenderit
+              elit esse deserunt duis mollit fugiat exercitation. Tempor aliquip sit non pariatur incididunt ad eu
+              ullamco amet anim exercitation eiusmod est. Sint ullamco sit deserunt et nisi ullamco Lorem. Occaecat esse
+              ut nulla eu veniam dolor proident sunt nisi in. Nulla qui veniam veniam nisi ipsum quis cupidatat esse
+              culpa. Aute ut incididunt dolor amet non sunt adipisicing.
+            </p>
+            <button>글 수정 요청</button>
+          </div>
+        </div>
         <div className="modal-footer"></div>
       </Wrapper>
     </ModalLayout>
@@ -38,16 +90,104 @@ const Wrapper = styled.div`
   overflow-y: scroll;
 
   .modal-header {
-    height: 400px;
-    background: ${(props) => props.theme.gray[0]};
+    padding: 30px;
+    display: block;
+    margin-bottom: 30px;
+
+    img {
+      display: block;
+      width: 100%;
+      min-height: 350px;
+      object-fit: cover;
+    }
+  }
+
+  .modal-header .contents {
+    padding: 0 30px;
+
+    .info {
+      margin-bottom: 40px;
+    }
+    .statistics {
+      display: flex;
+      justify-content: space-evenly;
+      padding-bottom: 50px;
+      width: 100%;
+
+      span {
+        position: relative;
+        border-radius: 50%;
+        width: 150px;
+        height: 150px;
+        line-height: 130px;
+        text-align: center;
+        font-size: 4rem;
+        font-weight: 700;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+
+        &::before {
+          content: attr(label);
+          position: absolute;
+          top: 50px;
+          left: 50%;
+          transform: translateX(-50%);
+          font-size: 1rem;
+          font-weight: 400;
+        }
+      }
+    }
+
+    .buttons button {
+      width: 100%;
+      padding: 10px 40px;
+      border: 1px solid ${(props) => props.theme.gray[0]};
+      margin-right: 10px;
+      margin-bottom: 10px;
+    }
   }
 
   .modal-body {
-    height: 400px;
-    background: blue;
+    .section {
+      padding: 30px 50px 50px;
+      border: 1px solid ${(props) => props.theme.gray[1]};
+      border-radius: 10px;
+      margin-bottom: 30px;
+
+      h2 {
+        margin-bottom: 10px;
+        font-weight: bold;
+      }
+
+      button {
+        width: 170px;
+        padding: 10px 10px;
+        border: 1px solid ${(props) => props.theme.gray[1]};
+        margin-top: 20px;
+      }
+    }
   }
   .modal-footer {
     height: 800px;
     background: green;
+  }
+
+  @media (min-width: 992px) {
+    .modal-header {
+      display: flex;
+
+      img {
+        width: 350px;
+      }
+
+      .contents {
+        flex: 1;
+      }
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .modal-header .contents .buttons button {
+      width: 170px;
+    }
   }
 `;
