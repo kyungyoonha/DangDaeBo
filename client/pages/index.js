@@ -43,4 +43,5 @@ const Contents = styled.div`
   height: calc(100vh - 100px);
   display: flex;
   align-items: stretch;
+  overflow: hidden;
 `;

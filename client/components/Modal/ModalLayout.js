@@ -2,16 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-import { Container } from '../Layout';
-
-const ModalLayout = ({ className, w = '600px', onCloseModal, children }) => {
+const ModalLayout = ({ className, onCloseModal, children }) => {
   return (
     <Wrapper className={className} onClick={onCloseModal}>
-      <Container>
-        <div className="modal-box" onClick={(e) => e.stopPropagation()} style={{ width: w }}>
-          {children}
-        </div>
-      </Container>
+      <WrapperInner onClick={(e) => e.stopPropagation()}>{children}</WrapperInner>
     </Wrapper>
   );
 };
@@ -32,12 +26,28 @@ const Wrapper = styled.div`
   height: 100vh;
   background: rgba(0, 0, 0, 0.7);
   z-index: 2;
+`;
 
-  .modal-box {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: #fff;
+const WrapperInner = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  padding: 0 10px;
+  @media (min-width: 576px) {
+  }
+
+  @media (min-width: 768px) {
+    padding: 0 10px;
+  }
+
+  @media (min-width: 992px) {
+    padding: 0 10px;
+  }
+
+  @media (min-width: 1200px) {
+    width: 1200px;
+    margin: 0 auto;
   }
 `;
