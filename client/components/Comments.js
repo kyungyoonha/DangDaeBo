@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import Comment from './Comment';
 
 const Comments = () => {
+  const [category, setCategory] = useState('best');
+
+  const onClickCategory = (ctg) => {
+    setCategory(ctg);
+  };
   return (
     <Wrapper>
       <div className="comments-textarea">
@@ -16,8 +21,12 @@ const Comments = () => {
       </div>
       <div className="comments-contents">
         <div className="comments-contents-category">
-          <span className="active">베스트 댓글</span>
-          <span>전체 댓글</span>
+          <span className={category === 'best' ? 'active' : ''} onClick={() => onClickCategory('best')}>
+            베스트 댓글
+          </span>
+          <span className={category === 'total' ? 'active' : ''} onClick={() => onClickCategory('total')}>
+            전체 댓글
+          </span>
         </div>
         {[...new Array(10)].map((item, idx) => (
           <Comment key={idx} />
@@ -27,7 +36,7 @@ const Comments = () => {
   );
 };
 
-export default Comments;
+export default React.memo(Comments);
 
 const Wrapper = styled.div`
   .comments-textarea {
