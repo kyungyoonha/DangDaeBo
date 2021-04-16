@@ -11,26 +11,31 @@ const Comments = () => {
   };
   return (
     <Wrapper>
-      <div className="comments-textarea">
+      <div className="comments-header">
         <h2>의견쓰기</h2>
         <textarea rows="3" placeholder="입력해주세요." />
-        <div className="comments-textarea-bottom">
+        <div className="comments-header-bottom">
           <span>0/500</span>
           <button>등록</button>
         </div>
       </div>
-      <div className="comments-contents">
-        <div className="comments-contents-category">
-          <span className={category === 'best' ? 'active' : ''} onClick={() => onClickCategory('best')}>
+      <div className="comments-body">
+        <div className="comments-body-category">
+          <button className={category === 'best' ? 'active' : ''} onClick={() => onClickCategory('best')}>
             베스트 댓글
-          </span>
-          <span className={category === 'total' ? 'active' : ''} onClick={() => onClickCategory('total')}>
+          </button>
+          <button className={category === 'total' ? 'active' : ''} onClick={() => onClickCategory('total')}>
             전체 댓글
-          </span>
+          </button>
         </div>
         {[...new Array(10)].map((item, idx) => (
           <Comment key={idx} />
         ))}
+      </div>
+      <div className="comments-footer">
+        <span>
+          전체 댓글 보기<ion-icon name="chevron-forward-outline"></ion-icon>
+        </span>
       </div>
     </Wrapper>
   );
@@ -39,7 +44,7 @@ const Comments = () => {
 export default React.memo(Comments);
 
 const Wrapper = styled.div`
-  .comments-textarea {
+  .comments-header {
     h2 {
       margin-bottom: 10px;
     }
@@ -50,7 +55,7 @@ const Wrapper = styled.div`
     }
   }
 
-  .comments-textarea-bottom {
+  .comments-header-bottom {
     margin-bottom: 50px;
     button {
       float: right;
@@ -62,22 +67,27 @@ const Wrapper = styled.div`
     }
   }
 
-  .comments-contents-category {
-    padding-bottom: 10px;
+  .comments-body-category {
     border-bottom: 1px solid ${(props) => props.theme.gray[1]};
-    span {
+    button {
+      margin-bottom: -1px;
       font-size: 1.1rem;
       padding: 10px 40px;
       border: 1px solid ${(props) => props.theme.gray[1]};
     }
 
-    span:nth-child(2) {
+    button:nth-child(2) {
       margin: -1px;
     }
 
-    span.active {
+    button.active {
       background: ${(props) => props.theme.gray[0]};
       color: white;
     }
+  }
+
+  .comments-footer {
+    padding-left: 20px;
+    padding-bottom: 30px;
   }
 `;
