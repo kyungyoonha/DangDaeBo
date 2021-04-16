@@ -94,7 +94,7 @@ const CalendarMain = () => {
         ))}
       </div>
       {!isFetched && <Loader />}
-      {!modal && <ModalHero id={modal} onCloseModal={onCloseModal} />}
+      {modal && <ModalHero id={modal} onCloseModal={onCloseModal} />}
     </Wrapper>
   );
 };
