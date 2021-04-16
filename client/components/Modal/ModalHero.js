@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 import ModalLayout from './ModalLayout';
+import Comments from '../Comments';
 
 const dummyData = {
   id: 2,
@@ -71,7 +72,9 @@ const ModalHero = ({ id, onCloseModal }) => {
             <button>글 수정 요청</button>
           </div>
         </div>
-        <div className="modal-footer"></div>
+        <div className="modal-footer">
+          <Comments />
+        </div>
       </Wrapper>
     </ModalLayout>
   );
@@ -167,8 +170,6 @@ const Wrapper = styled.div`
     }
   }
   .modal-footer {
-    height: 800px;
-    background: green;
   }
 
   @media (min-width: 992px) {
