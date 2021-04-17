@@ -6,7 +6,7 @@ import Comment from './Comment';
 const Comments = () => {
   const [category, setCategory] = useState('best');
 
-  const onClickCategory = (ctg) => {
+  const onClickCategory = (ctg) => () => {
     setCategory(ctg);
   };
   return (
@@ -21,15 +21,15 @@ const Comments = () => {
       </div>
       <div className="comments-body">
         <div className="comments-body-category">
-          <button className={category === 'best' ? 'active' : ''} onClick={() => onClickCategory('best')}>
+          <button className={category === 'best' ? 'active' : ''} onClick={onClickCategory('best')}>
             베스트 댓글
           </button>
-          <button className={category === 'total' ? 'active' : ''} onClick={() => onClickCategory('total')}>
+          <button className={category === 'total' ? 'active' : ''} onClick={onClickCategory('total')}>
             전체 댓글
           </button>
         </div>
         {[...new Array(10)].map((item, idx) => (
-          <Comment key={idx} />
+          <Comment key={idx} isBest={category === 'best'} />
         ))}
       </div>
       <div className="comments-footer">
