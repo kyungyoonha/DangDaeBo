@@ -75,6 +75,9 @@ const ModalHero = ({ id, onCloseModal }) => {
         <div className="modal-footer">
           <Comments />
         </div>
+        <div className="modal-close" onClick={onCloseModal}>
+          <ion-icon name="close-outline"></ion-icon>
+        </div>
       </Wrapper>
     </ModalLayout>
   );
@@ -91,6 +94,7 @@ const Wrapper = styled.div`
   min-height: 900px;
   height: 900px;
   overflow-y: scroll;
+  position: relative;
 
   .modal-header {
     padding: 30px;
@@ -170,6 +174,12 @@ const Wrapper = styled.div`
     }
   }
   .modal-footer {
+  }
+  .modal-close {
+    position: fixed;
+    top: 10px;
+    right: 30px;
+    font-size: 3rem;
   }
 
   @media (min-width: 992px) {
