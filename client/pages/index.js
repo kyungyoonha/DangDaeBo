@@ -28,9 +28,9 @@ export const getServerSideProps = wrapper.getServerSideProps(async (context) => 
     axios.defaults.headers.Cookie = cookie;
   }
 
-  context.store.dispatch({
-    type: LOAD_MY_INFO_REQUEST,
-  });
+  // context.store.dispatch({
+  //   type: LOAD_MY_INFO_REQUEST,
+  // });
 
   context.store.dispatch(END);
 
