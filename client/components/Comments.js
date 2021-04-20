@@ -4,8 +4,16 @@ import styled from 'styled-components';
 import Comment from './Comment';
 
 const Comments = () => {
+  const [input, setInput] = useState('');
   const [category, setCategory] = useState('best');
 
+  const onChange = (e) => {
+    if (input.length > 500) {
+      alert('500자까지만 입력 가능합니다.');
+      return;
+    }
+    setInput(e.target.value);
+  };
   const onClickCategory = (ctg) => () => {
     setCategory(ctg);
   };
@@ -13,9 +21,9 @@ const Comments = () => {
     <Wrapper>
       <div className="comments-header">
         <h2>의견쓰기</h2>
-        <textarea rows="3" placeholder="입력해주세요." />
+        <textarea rows="3" placeholder="입력해주세요." value={input} onChange={onChange} />
         <div className="comments-header-bottom">
-          <span>0/500</span>
+          <span>{input.length}/500</span>
           <button>등록</button>
         </div>
       </div>
@@ -68,16 +76,16 @@ const Wrapper = styled.div`
   }
 
   .comments-body-category {
-    border-bottom: 1px solid ${(props) => props.theme.gray[1]};
+    border-bottom: 1px solid ${(props) => props.theme.gray[0]};
     button {
-      margin-bottom: -1px;
+      margin-bottom: -2px;
       font-size: 1.1rem;
       padding: 10px 40px;
-      border: 1px solid ${(props) => props.theme.gray[1]};
+      border: 1px solid ${(props) => props.theme.gray[0]};
     }
 
     button:nth-child(2) {
-      margin: -1px;
+      border-left: none;
     }
 
     button.active {
