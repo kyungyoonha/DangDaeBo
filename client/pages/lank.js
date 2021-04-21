@@ -79,29 +79,52 @@ const Table = styled.div`
   width: 100%;
   text-align: center;
 
-  .header ul {
-    display: flex;
-    background: ${(props) => props.theme.blue[0]};
-    color: #fff;
-    padding-top: 10px;
-    padding-bottom: 10px;
+  .header {
+    position: relative;
+    ul {
+      display: flex;
+      background: ${(props) => props.theme.blue[0]};
+      color: #fff;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      opacity: 0;
 
-    li {
-      width: 16.6%;
-      text-align: center;
+      li {
+        width: 16.6%;
+        text-align: center;
+      }
+    }
+
+    &::before {
+      content: '순위';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: ${(props) => props.theme.blue[0]};
+      color: #fff;
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+    @media (min-width: 992px) {
+      ul {
+        opacity: 1;
+      }
+
+      &::before {
+        opacity: 0;
+      }
     }
   }
 
   .body .row {
+    padding-bottom: 50px;
     border-bottom: 1px solid ${(props) => props.theme.line[1]};
+    position: relative;
 
     ul {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
       li {
-        width: 16.6%;
+        width: 100%;
         overflow: hidden;
       }
     }
@@ -111,8 +134,13 @@ const Table = styled.div`
       border-radius: 10px;
       color: ${(props) => props.theme.blue[0]};
       font-weight: 400;
+      width: 80%;
     }
     .row-lank {
+      display: inline-block;
+      position: absolute;
+      top: 0;
+      left: 0;
       font-size: 3rem;
       font-weight: 700;
       color: ${(props) => props.theme.gray[1]};
@@ -121,10 +149,39 @@ const Table = styled.div`
     .row-image {
       padding: 20px;
       img {
-        width: 150px;
-        height: 150px;
+        width: 100%;
+        height: 300px;
         object-fit: cover;
-        border-radius: 50%;
+        border-radius: 20px;
+        box-shadow: 0 5px 5px rgba(0, 0, 0, 0.7);
+      }
+    }
+    @media (min-width: 992px) {
+      padding-bottom: 0;
+      ul {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        li {
+          width: 16.6%;
+        }
+      }
+      .row-lank {
+        position: relative;
+        font-size: 3rem;
+        font-weight: 700;
+        color: ${(props) => props.theme.gray[1]};
+      }
+
+      .row-image {
+        padding: 20px;
+        img {
+          width: 150px;
+          height: 150px;
+          object-fit: cover;
+          border-radius: 50%;
+        }
       }
     }
   }
