@@ -119,10 +119,12 @@ const Table = styled.div`
 
   .body .row {
     padding-bottom: 50px;
-    border-bottom: 1px solid ${(props) => props.theme.line[1]};
     position: relative;
+    padding: 0 20px 20px;
 
     ul {
+      padding-bottom: 30px;
+      overflow: hidden;
       li {
         width: 100%;
         overflow: hidden;
@@ -137,22 +139,16 @@ const Table = styled.div`
       width: 80%;
     }
     .row-lank {
-      display: inline-block;
-      position: absolute;
-      top: 0;
-      left: 0;
-      font-size: 3rem;
+      font-size: 2rem;
       font-weight: 700;
-      color: ${(props) => props.theme.gray[1]};
+      background: #ebf2f8;
     }
 
     .row-image {
-      padding: 20px;
       img {
         width: 100%;
-        height: 300px;
+        height: 350px;
         object-fit: cover;
-        border-radius: 20px;
         box-shadow: 0 5px 5px rgba(0, 0, 0, 0.7);
       }
     }
@@ -162,16 +158,18 @@ const Table = styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
+        border-bottom: 1px solid ${(props) => props.theme.line[1]};
 
         li {
           width: 16.6%;
         }
       }
       .row-lank {
-        position: relative;
         font-size: 3rem;
         font-weight: 700;
         color: ${(props) => props.theme.gray[1]};
+        background: none;
+        width: 16.6%;
       }
 
       .row-image {
@@ -179,7 +177,6 @@ const Table = styled.div`
         img {
           width: 150px;
           height: 150px;
-          object-fit: cover;
           border-radius: 50%;
         }
       }
