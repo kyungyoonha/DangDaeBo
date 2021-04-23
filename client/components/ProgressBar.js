@@ -7,7 +7,7 @@ const ProgressBar = ({ title, percent }) => {
     <Wrapper>
       {/* <h2>{`${title}(${percent}%)`}</h2> */}
       <BarContainer percent={percent} />
-      <span className="bar-endpoint" style={{ left: `${percent}%` }} />
+      <span className="bar__endpoint" style={{ left: `${percent}%` }} />
     </Wrapper>
   );
 };
@@ -27,7 +27,7 @@ const Wrapper = styled.div`
     text-align: center;
   }
 
-  .bar-endpoint {
+  .bar__endpoint {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);

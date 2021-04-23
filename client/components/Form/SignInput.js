@@ -24,7 +24,7 @@ const SignInput = ({
         required={required}
         autoComplete="off"
       />
-      <p className={error ? 'err on' : 'err'}>{error}</p>
+      <p className={`signinput__error ${error ? 'signinput__error--on' : ''}`}>{error}</p>
     </Wrapper>
   );
 };
@@ -58,14 +58,14 @@ const Wrapper = styled.div`
     border: 1px solid ${(props) => props.theme.gray[1]};
   }
 
-  .err {
+  .signinput__error {
     display: none;
     position: absolute;
     top: 77px;
     font-size: 11px;
     color: ${(props) => props.theme.red};
   }
-  .err.on {
+  .signinput__error--on {
     display: block;
   }
 `;

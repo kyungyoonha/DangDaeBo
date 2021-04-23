@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 
 const Weeks = ({ week, isActive, dateKey, onClick }) => {
   return (
-    <WrapperTr className={isActive ? 'active' : ''}>
+    <WrapperTr className={`weeks ${isActive ? ' weeks--active' : ''}`}>
       {week.map((item, i) => (
         <td
-          className={`${item.isGray ? 'gray' : ''} ${item.key === dateKey ? ' today' : ''}`}
+          className={`${item.isGray ? 'weeks__data--gray' : ''} ${item.key === dateKey ? ' weeks__data--today' : ''}`}
           key={i}
           onClick={() => onClick(item.key)}>
           <a href={'#' + item.key}>{item.day}</a>
@@ -34,7 +34,7 @@ const WrapperTr = styled.tr`
   color: ${(props) => props.theme.gray[2]};
   position: relative;
 
-  &.active {
+  &.weeks--active {
     background: #ffc0cb9e;
     a {
       color: white;
@@ -50,13 +50,16 @@ const WrapperTr = styled.tr`
     padding: 0 !important;
     border-collapse: collapse;
   }
-  td.gray a {
-    color: ${(props) => props.theme.gray[0]};
-  }
 
-  td.today a {
-    display: block;
-    color: #000;
-    font-weight: 600;
+  .weeks__data {
+    &--gray a {
+      color: ${(props) => props.theme.gray[0]};
+    }
+
+    &--today a {
+      display: block;
+      color: #000;
+      font-weight: 600;
+    }
   }
 `;

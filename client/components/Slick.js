@@ -52,18 +52,22 @@ const Slick = () => {
   };
   return (
     <Wrapper>
-      <div className="items" ref={itemsEL} onMouseDown={onMouseDown} onMouseUp={onMouseUp} onMouseMove={onMouseMove}>
+      <div
+        className="slick__list"
+        ref={itemsEL}
+        onMouseDown={onMouseDown}
+        onMouseUp={onMouseUp}
+        onMouseMove={onMouseMove}>
         {dummy.slice(0, 10).map((item, idx) => (
           <div
             key={idx}
-            className={`item${startIndex + idx === 0 ? ' center' : ''}`}
             style={{
               transform: `translateX(${scrollX}px) scale(${1.4 - 0.1 * Math.abs(startIndex + idx)})`,
               zIndex: itemNum - Math.abs(startIndex + idx) || 1,
               marginRight: itemMargin - Math.abs(startIndex + idx) * 1.1,
             }}>
             <img src={item.url} alt="" />
-            <div className="item-content">
+            <div className="slick__content">
               <h2>{item.name}</h2>
               <p>{item.date}</p>
             </div>
@@ -71,9 +75,9 @@ const Slick = () => {
         ))}
       </div>
       <div className="slick-dots">
-        <ul>
+        <ul className="slick-dots__list">
           {[...new Array(itemNum)].map((_, idx) => (
-            <li key={idx} className={`${startIndex + idx === 0 ? ' active' : ''}`} />
+            <li key={idx} className={`slick-dots__item ${startIndex + idx === 0 ? 'slick-dots__item--active' : ''}`} />
           ))}
         </ul>
       </div>
@@ -95,7 +99,7 @@ const Wrapper = styled.div`
   background: #212121;
   color: #fff;
 
-  .items {
+  .slick__list {
     transform-style: preserve-3d;
     display: flex;
     flex-wrap: nowrap;
@@ -104,7 +108,7 @@ const Wrapper = styled.div`
     background: none;
   }
 
-  .item {
+  .slick__item {
     flex-shrink: 0;
     width: 280px;
     height: 380px;
@@ -119,7 +123,7 @@ const Wrapper = styled.div`
       object-fit: cover;
     }
   }
-  .item-content {
+  .slick__content {
     padding-top: 10px;
     text-align: center;
 
@@ -131,20 +135,20 @@ const Wrapper = styled.div`
   .slick-dots {
     margin-top: 100px;
     text-align: center;
-    ul {
-      display: inline-block;
-      margin: 0 auto;
-    }
-    li {
-      width: 15px;
-      height: 15px;
-      background: #000;
-      border-radius: 50%;
-      float: left;
-      margin-right: 5px;
-    }
+  }
+  .slick-dots__list {
+    display: inline-block;
+    margin: 0 auto;
+  }
+  .slick-dots__item {
+    width: 15px;
+    height: 15px;
+    background: #000;
+    border-radius: 50%;
+    float: left;
+    margin-right: 5px;
 
-    li.active {
+    &--active {
       background: #fff;
     }
   }

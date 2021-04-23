@@ -17,10 +17,10 @@ const SlickInfo = () => {
     <Wrapper>
       {imgList.map((item, idx) => (
         <>
-          <Background key={idx} className={idx === imgIdx ? 'active' : 'hide'} url={item.url} />
-          <div className="slickinfo-text" style={{ display: idx === imgIdx ? 'block' : 'none' }}>
-            <h2>{item.title}</h2>
-            <p>{item.subTitle}</p>
+          <Background key={idx} className={idx === imgIdx ? 'slick-info--active' : 'slick-info--hide'} url={item.url} />
+          <div className="slick-info__text" style={{ display: idx === imgIdx ? 'block' : 'none' }}>
+            <h2 className="slick-info__title">{item.title}</h2>
+            <p className="slick-info-contents">{item.subTitle}</p>
           </div>
         </>
       ))}
@@ -35,7 +35,7 @@ const Wrapper = styled.div`
   height: 500px;
   overflow: hidden;
 
-  .slickinfo-text {
+  .slick-info__text {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -46,15 +46,6 @@ const Wrapper = styled.div`
     text-align: center;
     color: white;
     padding-top: 90px;
-    h2 {
-      font-size: 3rem;
-      font-weight: 700;
-    }
-    p {
-      font-size: 1.7rem;
-      font-weight: 100;
-      color: ${(props) => props.theme.gray[0]};
-    }
 
     &::before {
       content: '';
@@ -78,6 +69,24 @@ const Wrapper = styled.div`
       border-right: 6px solid #fff;
     }
   }
+  .slick-info__title {
+    font-size: 3rem;
+    font-weight: 700;
+  }
+  .slick-info__cotnents {
+    font-size: 1.7rem;
+    font-weight: 100;
+    color: ${(props) => props.theme.gray[0]};
+  }
+  .slick-info--active {
+    opacity: 1;
+    animation: animate-slick-bg 4s ease forwards;
+  }
+
+  .slick-info--hide {
+    opacity: 0;
+    animation: none;
+  }
 `;
 
 const Background = styled.div`
@@ -90,16 +99,6 @@ const Background = styled.div`
   background-size: cover;
   background-position: center;
   opacity: 0;
-
-  &.active {
-    opacity: 1;
-    animation: animate-slick-bg 4s ease forwards;
-  }
-
-  &.hide {
-    opacity: 0;
-    animation: none;
-  }
 
   @keyframes animate-slick-bg {
     0% {

@@ -21,17 +21,17 @@ const ModalHero = ({ id, onCloseModal }) => {
         <div className="modal-header">
           <img src={dummyData.url} />
 
-          <div className="contents">
-            <div className="info">
+          <div className="modal-header__contents">
+            <div className="modal-header__info">
               <h2>{dummyData.name}</h2>
               <p>Sunt sint ex Lorem ut cillum ut laboris magna do est.</p>
             </div>
-            <div className="statistics">
+            <div className="modal-header__statistics">
               <span label="좋아요">50</span>
               <span label="댓글 수">100</span>
               <span label="즐겨찾기">10</span>
             </div>
-            <div className="buttons">
+            <div className="modal-header__buttons">
               <button>좋아요</button>
               <button>댓글달기</button>
               <button>즐겨찾기</button>
@@ -39,7 +39,7 @@ const ModalHero = ({ id, onCloseModal }) => {
           </div>
         </div>
         <div className="modal-body">
-          <div className="section">
+          <div className="modal-body__section">
             <h2>1. 상세내용1</h2>
             <p>
               Deserunt eu in fugiat consequat tempor officia ut nostrud. Qui aliqua exercitation ut deserunt non aute
@@ -55,7 +55,7 @@ const ModalHero = ({ id, onCloseModal }) => {
             </p>
             <button>글 수정 요청</button>
           </div>
-          <div className="section">
+          <div className="modal-body__section">
             <h2>2. 상세내용1</h2>
             <p>
               Deserunt eu in fugiat consequat tempor officia ut nostrud. Qui aliqua exercitation ut deserunt non aute
@@ -109,72 +109,69 @@ const Wrapper = styled.div`
     }
   }
 
-  .modal-header .contents {
+  .modal-header__contents {
     padding: 0 30px;
+  }
 
-    .info {
-      margin-bottom: 40px;
-    }
-    .statistics {
-      display: flex;
-      justify-content: space-evenly;
-      padding-bottom: 50px;
-      width: 100%;
+  .modal-header__info {
+    margin-bottom: 40px;
+  }
+  .modal-header__statistics {
+    display: flex;
+    justify-content: space-evenly;
+    padding-bottom: 50px;
+    width: 100%;
 
-      span {
-        position: relative;
-        border-radius: 50%;
-        width: 150px;
-        height: 150px;
-        line-height: 130px;
-        text-align: center;
-        font-size: 4rem;
-        font-weight: 700;
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+    span {
+      position: relative;
+      border-radius: 50%;
+      width: 150px;
+      height: 150px;
+      line-height: 130px;
+      text-align: center;
+      font-size: 4rem;
+      font-weight: 700;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
 
-        &::before {
-          content: attr(label);
-          position: absolute;
-          top: 50px;
-          left: 50%;
-          transform: translateX(-50%);
-          font-size: 1rem;
-          font-weight: 400;
-        }
+      &::before {
+        content: attr(label);
+        position: absolute;
+        top: 50px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 1rem;
+        font-weight: 400;
       }
     }
+  }
 
-    .buttons button {
-      width: 100%;
-      padding: 10px 40px;
-      border: 1px solid ${(props) => props.theme.gray[0]};
-      margin-right: 10px;
+  .modal-header__buttons button {
+    width: 100%;
+    padding: 10px 40px;
+    border: 1px solid ${(props) => props.theme.gray[0]};
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
+
+  .modal-body__section {
+    padding: 30px 50px 50px;
+    border: 1px solid ${(props) => props.theme.gray[1]};
+    border-radius: 10px;
+    margin-bottom: 30px;
+
+    h2 {
       margin-bottom: 10px;
+      font-weight: bold;
     }
-  }
 
-  .modal-body {
-    .section {
-      padding: 30px 50px 50px;
+    button {
+      width: 170px;
+      padding: 10px 10px;
       border: 1px solid ${(props) => props.theme.gray[1]};
-      border-radius: 10px;
-      margin-bottom: 30px;
-
-      h2 {
-        margin-bottom: 10px;
-        font-weight: bold;
-      }
-
-      button {
-        width: 170px;
-        padding: 10px 10px;
-        border: 1px solid ${(props) => props.theme.gray[1]};
-        margin-top: 20px;
-      }
+      margin-top: 20px;
     }
   }
-  .modal-footer {
-  }
+
   .modal-close {
     position: fixed;
     top: 10px;
@@ -189,15 +186,14 @@ const Wrapper = styled.div`
       img {
         width: 350px;
       }
-
-      .contents {
-        flex: 1;
-      }
+    }
+    .modal-header__contents {
+      flex: 1;
     }
   }
 
   @media (min-width: 1200px) {
-    .modal-header .contents .buttons button {
+    .modal-header__buttons button {
       width: 170px;
     }
   }

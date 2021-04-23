@@ -6,7 +6,7 @@ import { LogoBox } from './Logo';
 const Loader = () => {
   return (
     <Background>
-      <div className="logo-wrapper">
+      <div className="logo__wrapper">
         <Logo />
         <p>Loading...</p>
       </div>
@@ -25,7 +25,7 @@ const Background = styled.div`
   background: rgba(0, 0, 0, 0.7);
   z-index: 2;
 
-  .logo-wrapper {
+  .logo__wrapper {
     position: absolute;
     top: 50%;
     left: 50%;

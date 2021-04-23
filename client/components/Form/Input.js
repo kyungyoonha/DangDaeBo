@@ -11,14 +11,13 @@ const Input = ({
   placeholder = '답변을 입력해주세요.',
   type = 'text',
   required = false,
-  error = '',
+  // error = '',
 }) => {
   return (
     <Wrapper>
-      <label>{label}</label>
-      <div className="input-right">
+      <label className="form-input__left">{label}</label>
+      <div className="form-input__right">
         <input
-          className="input-box"
           name={name}
           value={value}
           type={type}
@@ -29,7 +28,7 @@ const Input = ({
         />
         <p>{description}</p>
       </div>
-      {/* <p className={error ? 'err on' : 'err'}>{error}</p> */}
+      {/* <p className={error ? 'form-input__error--on' : 'form-input__error'}>{error}</p> */}
     </Wrapper>
   );
 };
@@ -42,7 +41,7 @@ Input.propTypes = {
   onChange: PropTypes.func.isRequired,
   type: PropTypes.string,
   required: PropTypes.bool,
-  error: PropTypes.string,
+  // error: PropTypes.string,
 };
 
 export default React.memo(Input);
@@ -53,14 +52,14 @@ const Wrapper = styled.div`
   text-align: left;
   display: block;
 
-  label {
+  .form-input__left {
     font-size: 1.1rem;
     display: block;
     width: 100%;
     margin-bottom: 10px;
     font-weight: 600;
   }
-  .input-right {
+  .form-input__right {
     flex: 1;
 
     input {
@@ -76,7 +75,7 @@ const Wrapper = styled.div`
 
   @media (min-width: 992px) {
     display: flex;
-    label {
+    .form-input__left {
       display: inline-block;
       padding: 0 30px;
       width: 200px;

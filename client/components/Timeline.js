@@ -98,9 +98,9 @@ const Timeline = () => {
         {dummyData.map((item, idx) => (
           <TimelineItem>
             <h1>{item.date.split('-')[0]}년</h1>
-            <div className={`card${idx === active ? ' active' : ''}`}>
-              <img src={item.url} alt="" />
-              <div className="item-content">
+            <div className={`timeline-body__card ${idx === active ? 'timeline-body__card--active' : ''}`}>
+              <img className="timeline-body__image" src={item.url} alt="" />
+              <div className="timeline-body__contents">
                 <h2>{item.name}</h2>
                 <p>{item.date}</p>
               </div>
@@ -141,7 +141,7 @@ const TimelineItem = styled.div`
   width: 420px;
   text-align: center;
 
-  .card {
+  .timeline-body__card {
     position: absolute;
     top: 50px;
     left: 50%;
@@ -154,18 +154,18 @@ const TimelineItem = styled.div`
     transition: 0.3s;
     opacity: 0.6;
 
-    &.active {
+    &--active {
       transform: translateX(-50%) scale(1.2);
       opacity: 1;
     }
   }
-  .card img {
+  .timeline-body__image {
     width: 100%;
     height: 400px;
     object-fit: cover;
   }
 
-  .card .item-content {
+  .timeline-body__contents {
     padding-top: 10px;
     text-align: center;
 

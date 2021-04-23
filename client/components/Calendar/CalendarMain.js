@@ -49,7 +49,7 @@ const CalendarMain = () => {
   return (
     <Wrapper>
       <div className="cal-header">
-        <div className="cal-header-title">
+        <div className="cal-header__title">
           <Button onClick={onClickPrevButton} m="10px" p="5px 10px">
             <i className="fas fa-angle-left"></i>
           </Button>
@@ -60,8 +60,8 @@ const CalendarMain = () => {
             <i className="fas fa-angle-right"></i>
           </Button>
         </div>
-        <div className="cal-header-week">
-          <ul>
+        <div className="cal-header__week">
+          <ul className="cal-header__list">
             <li>일</li>
             <li>월</li>
             <li>화</li>
@@ -75,15 +75,17 @@ const CalendarMain = () => {
 
       <div className="cal-body">
         {weeks.map((week, idx) => (
-          <ul key={idx}>
+          <ul key={idx} className="cal-body__list">
             {week.map((item) => (
-              <li key={item.key} id={item.key}>
-                <div className="cal-body-day">{item.day}</div>
-                <div className="cal-body-data">
+              <li key={item.key} id={item.key} className="cal-body__item">
+                <div className="cal-body__day">{item.day}</div>
+                <div className="cal-body__data">
                   {dataObj[item.key] &&
                     dataObj[item.key].map((data) => (
                       <p key={data.id} onClick={() => onOpenModal(data.id)}>
-                        <span value={data.category}>{data.category}</span>
+                        <span className="cal-body__label" value={data.category}>
+                          {data.category}
+                        </span>
                         {data.name}
                       </p>
                     ))}
@@ -108,7 +110,7 @@ const Wrapper = styled.div`
     width: 100%;
   }
 
-  .cal-header-title {
+  .cal-header__title {
     height: 50px;
     text-align: center;
     background: #03c75a;
@@ -116,32 +118,33 @@ const Wrapper = styled.div`
       margin-right: 10px;
     }
   }
-
-  .cal-header-week {
+  .cal-header__week {
     overflow-y: scroll;
-    ul {
-      border: 0px solid ${(props) => props.theme.line[1]};
-      border-width: 0 0 1px 1px;
-      overflow: hidden;
-      position: relative;
-    }
-    ul li {
-      float: left;
-      width: 14.28%;
-      height: 25px;
-      line-height: 25px;
-      text-align: center;
-      border: 0px solid ${(props) => props.theme.line[1]};
-      border-width: 1px 1px 0 0;
-      background: #4b4e3d;
-      color: white;
-    }
+  }
 
-    ul li:nth-child(1) {
+  .cal-header__list {
+    border: 0px solid ${(props) => props.theme.line[1]};
+    border-width: 0 0 1px 1px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .cal-header__list li {
+    float: left;
+    width: 14.28%;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    border: 0px solid ${(props) => props.theme.line[1]};
+    border-width: 1px 1px 0 0;
+    background: #4b4e3d;
+    color: white;
+
+    &:nth-child(1) {
       color: pink;
     }
 
-    ul li:last-child {
+    &:last-child {
       color: skyblue;
     }
   }
@@ -151,44 +154,45 @@ const Wrapper = styled.div`
     height: calc(100% - 75px);
     overflow-y: scroll;
     scroll-behavior: smooth;
+  }
 
-    ul {
-      border: 1px solid ${(props) => props.theme.line[1]};
-      border-width: 0 0 1px 1px;
-      overflow: hidden;
-    }
-    ul li {
-      float: left;
-      width: 14.28%;
-      border: 0px solid ${(props) => props.theme.line[1]};
-      border-width: 1px 1px 0 0;
-    }
+  .cal-body__list {
+    border: 1px solid ${(props) => props.theme.line[1]};
+    border-width: 0 0 1px 1px;
+    overflow: hidden;
+  }
 
-    ul li:nth-child(1) .week-day {
+  .cal-body__item {
+    float: left;
+    width: 14.28%;
+    border: 0px solid ${(props) => props.theme.line[1]};
+    border-width: 1px 1px 0 0;
+
+    &:nth-child(1) .week-day {
       color: pink;
     }
-
-    ul li:last-child .week-day {
+    &:last-child .week-day {
       color: skyblue;
     }
   }
-  .cal-body-day {
+
+  .cal-body__day {
     position: sticky;
     background: ${(props) => props.theme.line[0]};
     text-align: center;
   }
 
-  .cal-body-data {
+  .cal-body__data {
     min-height: 500px;
     padding-left: 7px;
     padding-top: 10px;
+
+    p {
+      cursor: pointer;
+    }
   }
 
-  .car-body-data p {
-    cursor: pointer;
-  }
-
-  .cal-body-data span {
+  .cal-body__label {
     background-color: #428fd7;
     border-radius: 5px;
     font-size: 0.9rem;

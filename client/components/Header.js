@@ -26,17 +26,17 @@ const Header = () => {
         </a>
       </Row>
       <StyledRow show="m" width="calc(80% - 170px)">
-        <ul>
-          <li className={asPath === '/' ? 'active' : ''}>
+        <ul className="nav__list">
+          <li className={`nav__item ${asPath === '/' ? 'nav__item--active' : ''}`}>
             <Link href="/">이번달 영웅</Link>
           </li>
-          <li className={asPath === '/today' ? 'active' : ''}>
+          <li className={`nav__item ${asPath === '/today' ? 'nav__item--active' : ''}`}>
             <Link href="/today">오늘의 영웅</Link>
           </li>
-          <li className={asPath === '/register' ? 'active' : ''}>
+          <li className={`nav__item ${asPath === '/register' ? 'nav__item--active' : ''}`}>
             <Link href="/register">영웅 등록</Link>
           </li>
-          <li className={asPath === '/info' ? 'active' : ''}>
+          <li className={`nav__item ${asPath === '/info' ? 'nav__item--active' : ''}`}>
             <Link href="/info">소개</Link>
           </li>
         </ul>
@@ -77,30 +77,6 @@ const Wrapper = styled.div`
     height: 100px;
     vertical-align: middle;
   }
-  .center {
-    width: 100%;
-    text-align: center;
-  }
-  ul {
-    height: 100%;
-    display: inline-block;
-    margin: 0 auto;
-    li {
-      float: left;
-      margin-right: 60px;
-    }
-
-    li.active {
-      a {
-        color: #000;
-      }
-    }
-
-    a {
-      font-weight: 500;
-      color: ${(props) => props.theme.gray[1]};
-    }
-  }
 
   .header-user {
     float: right;
@@ -114,4 +90,24 @@ const Wrapper = styled.div`
 
 const StyledRow = styled(Row)`
   text-align: center;
+
+  .nav__list {
+    height: 100%;
+    display: inline-block;
+    margin: 0 auto;
+  }
+
+  .nav__item {
+    float: left;
+    margin-right: 60px;
+
+    a {
+      font-weight: 500;
+      color: ${(props) => props.theme.gray[1]};
+    }
+
+    &--active a {
+      color: #000;
+    }
+  }
 `;

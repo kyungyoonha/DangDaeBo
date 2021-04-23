@@ -6,7 +6,7 @@ const Logo = ({ width }) => {
   return (
     <>
       <Wrapper width={width}>
-        <div className="logo-wrapper">
+        <div className="logo__wrapper">
           <LogoBox />
         </div>
         <Text>
@@ -36,7 +36,7 @@ const Wrapper = styled.div`
   width: ${(props) => (props.width ? props.width : '200px')};
   height: ${(props) => (props.width ? props.width / 2 : '100px')};
 
-  .logo-wrapper {
+  .logo__wrapper {
     width: 50%;
     height: 100%;
     padding: 1rem;

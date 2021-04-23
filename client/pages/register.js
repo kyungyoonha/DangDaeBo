@@ -7,7 +7,7 @@ import { Button } from '../components/Form';
 import { FormSectionBasic } from '../components/FormSection';
 
 const Register = () => {
-  const [isEdit, setIsEdit] = useState(false);
+  const [isEdit, setIsEdit] = useState(true);
 
   return (
     <>
@@ -19,28 +19,18 @@ const Register = () => {
         </div>
         {isEdit ? (
           <StyledContainer>
-            <h1 className="register-title">영웅 등록</h1>
-            <div className="register-description">
+            <h1 className="register-form__title">영웅 등록</h1>
+            <div className="register-form__contents">
               <h3>대한민국의 영웅을 등록해주세요. 일정한 절차를거친 후에 등록해드립니다.</h3>
               <p>※거짓 내용이 있는 경우 게시글이 삭제될 수 있습니다.</p>
             </div>
             <FormSectionBasic />
-            <Button className="register-submit" onClick={() => {}}>
+            <Button className="register-form__submit" onClick={() => {}}>
               제출
             </Button>
           </StyledContainer>
         ) : (
-          <StyledContainer>
-            <h1 className="register-title">영웅 등록</h1>
-            <div className="register-description">
-              <h3>대한민국의 영웅을 등록해주세요. 일정한 절차를거친 후에 등록해드립니다.</h3>
-              <p>※거짓 내용이 있는 경우 게시글이 삭제될 수 있습니다.</p>
-            </div>
-            <FormSectionBasic />
-            <Button className="register-submit" onClick={() => {}}>
-              제출
-            </Button>
-          </StyledContainer>
+          <div className="register-lank"></div>
         )}
       </Contents>
     </>
@@ -55,13 +45,13 @@ const Contents = styled.div`
   background: #f1f0e9;
   padding: 30px 0;
 
-  .register-title {
+  .register-form__title {
     padding-top: 80px;
     padding-bottom: 30px;
     font-weight: 700;
   }
 
-  .register-description {
+  .register-form__contents {
     margin-bottom: 20px;
     padding: 50px 30px;
     border-top: 1px solid #000;
@@ -73,7 +63,7 @@ const Contents = styled.div`
     }
   }
 
-  .register-submit {
+  .register-form__submit {
     margin-top: 30px;
     width: 100px;
   }

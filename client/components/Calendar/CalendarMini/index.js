@@ -47,7 +47,7 @@ const CalendarMini = () => {
 
   return (
     <Wrapper>
-      <div className="calmini-header">
+      <div className="calmini__header">
         <Button onClick={onClickPrevButton}>
           <i className="fas fa-angle-left"></i>
         </Button>
@@ -62,9 +62,7 @@ const CalendarMini = () => {
         <thead>
           <tr>
             {WeeksList.map((weekName) => (
-              <th className="calmini-header-th" key={weekName}>
-                {weekName}
-              </th>
+              <th key={weekName}>{weekName}</th>
             ))}
           </tr>
         </thead>
@@ -81,7 +79,7 @@ const CalendarMini = () => {
 export default React.memo(CalendarMini);
 
 const Wrapper = styled.div`
-  .calmini-header {
+  .calmini__header {
     position: relative;
     text-align: center;
     width: 100%;
@@ -112,7 +110,7 @@ const StyledTable = styled.table`
     border: 1px solid ${(props) => props.theme.line[0]};
   }
 
-  .calmini-header-th {
+  th {
     margin: 15px auto;
     border-bottom: 2px solid ${(props) => props.theme.gray[1]};
   }
