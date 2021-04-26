@@ -24,4 +24,9 @@ const Contents = styled.div`
   display: flex;
   align-items: stretch;
   background: #111111;
+
+  /* svg {
+    width: 100%;
+    height: 100vh;
+  } */
 `;
