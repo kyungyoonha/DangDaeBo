@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 import Header from '../components/Header';
@@ -7,18 +7,12 @@ import { Button } from '../components/Form';
 import { FormSectionBasic } from '../components/FormSection';
 
 const Register = () => {
-  const [isEdit, setIsEdit] = useState(true);
-
   return (
     <>
       <Header />
       <Contents>
-        <div className="register-header">
-          <button type="button">등록대기</button>
-          <button type="button">영웅등록</button>
-        </div>
-        {isEdit ? (
-          <StyledContainer>
+        <Container>
+          <FormWrapper>
             <h1 className="register-form__title">영웅 등록</h1>
             <div className="register-form__contents">
               <h3>대한민국의 영웅을 등록해주세요. 일정한 절차를거친 후에 등록해드립니다.</h3>
@@ -28,10 +22,8 @@ const Register = () => {
             <Button className="register-form__submit" onClick={() => {}}>
               제출
             </Button>
-          </StyledContainer>
-        ) : (
-          <div className="register-lank"></div>
-        )}
+          </FormWrapper>
+        </Container>
       </Contents>
     </>
   );
@@ -44,6 +36,20 @@ const Contents = styled.div`
   text-align: center;
   background: #f1f0e9;
   padding: 30px 0;
+
+  .register-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    button {
+      margin: 20px;
+      padding: 20px 100px;
+      border-radius: 10px;
+      background: #fff;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    }
+  }
 
   .register-form__title {
     padding-top: 80px;
@@ -69,9 +75,17 @@ const Contents = styled.div`
   }
 `;
 
-const StyledContainer = styled(Container)`
+const FormWrapper = styled.div`
   background: #fff;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
   border-radius: 20px;
   padding: 0 100px 100px;
+
+  @media (max-width: 576px) {
+    padding: 0 10px 100px;
+  }
+
+  @media (max-width: 768px) {
+    padding: 0 30px 100px;
+  }
 `;
