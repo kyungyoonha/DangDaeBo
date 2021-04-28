@@ -11,7 +11,7 @@ const Input = ({
   placeholder = '답변을 입력해주세요.',
   type = 'text',
   required = false,
-  // error = '',
+  errorMessage = '',
 }) => {
   return (
     <Wrapper>
@@ -21,14 +21,14 @@ const Input = ({
           name={name}
           value={value}
           type={type}
+          required={'required'}
           onChange={onChange}
-          required={required}
           autoComplete="off"
           placeholder={placeholder}
         />
         <p>{description}</p>
       </div>
-      {/* <p className={error ? 'form-input__error--on' : 'form-input__error'}>{error}</p> */}
+      {errorMessage && <p className="form-input__error--on">{errorMessage}</p>}
     </Wrapper>
   );
 };
@@ -41,24 +41,23 @@ Input.propTypes = {
   onChange: PropTypes.func.isRequired,
   type: PropTypes.string,
   required: PropTypes.bool,
-  // error: PropTypes.string,
+  errorMessage: PropTypes.string,
 };
 
 export default React.memo(Input);
 
 const Wrapper = styled.div`
+  position: relative;
   padding: 20px 20px 50px;
   border-bottom: 1px solid ${(props) => props.theme.line[1]};
   text-align: left;
-  display: block;
-
+  display: flex;
   .form-input__left {
-    font-size: 1.1rem;
-    display: block;
-    width: 100%;
-    margin-bottom: 10px;
-    font-weight: 600;
+    display: inline-block;
+    padding: 0 30px;
+    width: 200px;
   }
+
   .form-input__right {
     flex: 1;
 
@@ -73,12 +72,29 @@ const Wrapper = styled.div`
     }
   }
 
-  @media (min-width: 992px) {
-    display: flex;
+  .form-input__error--on {
+    display: block;
+    position: absolute;
+    top: 95px;
+    left: 220px;
+    font-size: 11px;
+    color: ${(props) => props.theme.red};
+  }
+
+  @media (max-width: 992px) {
+    display: block;
+
     .form-input__left {
-      display: inline-block;
-      padding: 0 30px;
-      width: 200px;
+      font-size: 1.1rem;
+      display: block;
+      width: 100%;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .form-input__error--on {
+      top: 130px;
+      left: 20px;
     }
   }
 `;
