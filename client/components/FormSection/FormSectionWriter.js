@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import useInputs from '../../hooks/useInputs';
-import { Input } from '../Form';
+import { Input, Button } from '../Form';
 
 const initialState = {
   name: '',
@@ -10,9 +10,16 @@ const initialState = {
   email: '',
 };
 
-const FormSectionWriter = () => {
-  const { inputs, errors, onChange } = useInputs(initialState);
+const FormSectionWriter = ({ setPage }) => {
+  const { inputs, errors, onChange, validateAll } = useInputs(initialState);
 
+  const onClickButton = () => {
+    const isValid = validateAll();
+
+    if (isValid) {
+      setPage(1);
+    }
+  };
   return (
     <Wrapper>
       <Input
@@ -43,10 +50,20 @@ const FormSectionWriter = () => {
         required={true}
         errorMessage={errors.phone}
       />
+
+      <Button type="button" className="form-section-writer__button" onClick={onClickButton}>
+        다음
+      </Button>
     </Wrapper>
   );
 };
 
 export default FormSectionWriter;
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  .form-section-writer__button {
+    margin-top: 30px;
+    width: 100px;
+    background: ${(props) => props.theme.green[0]};
+  }
+`;

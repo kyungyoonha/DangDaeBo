@@ -1,28 +1,24 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import Header from '../components/Header';
 import { Container } from '../components/Layout';
-import { Button } from '../components/Form';
 import { FormSectionWriter, FormSectionBasic } from '../components/FormSection';
 
-const Page = ({ page, onClickButton }) => {
+const Page = ({ page, setPage }) => {
   switch (page) {
     case 1:
-      return <FormSectionBasic onClickButton={onClickButton} />;
+      return <FormSectionBasic setPage={setPage} />;
     case 2:
-      return <FormSectionAdditional onClickButton={onClickButton} />;
+      return <FormSectionAdditional setPage={setPage} />;
     default:
-      return <FormSectionWriter onClickButton={onClickButton} />;
+      return <FormSectionWriter setPage={setPage} />;
   }
 };
 
 const Register = () => {
   const [page, setPage] = useState(0);
 
-  const onClickButton = useCallback((page) => {
-    setPage(page);
-  }, []);
   return (
     <>
       <Header />
@@ -45,15 +41,15 @@ const Register = () => {
                 3
               </span>
             </div>
-            <Page page={page} onClickButton={onClickButton} />
-            <Button
+            <Page page={page} setPage={setPage} />
+            {/* <Button
               type="button"
               className={`register-form__button register-form__button${page === 2 ? '--submit' : '--next'}`}
               onClick={(e) => {
                 console.log(e);
               }}>
               {page === 2 ? '제출' : '다음'}
-            </Button>
+            </Button> */}
           </FormWrapper>
         </Container>
       </Contents>
@@ -106,7 +102,7 @@ const Contents = styled.div`
     justify-content: center;
     align-items: center;
     margin-top: 50px;
-    margin-bottom: 30px;
+    margin-bottom: 50px;
     height: 100px;
     min-width: 550px;
 
@@ -156,18 +152,6 @@ const Contents = styled.div`
     }
     &:after {
       border-bottom: 3px dotted blue !important;
-    }
-  }
-  .register-form__button {
-    margin-top: 30px;
-    width: 100px;
-
-    &--submit {
-      background: ${(props) => props.theme.blue[0]};
-    }
-
-    &--next {
-      background: ${(props) => props.theme.green[0]};
     }
   }
 `;

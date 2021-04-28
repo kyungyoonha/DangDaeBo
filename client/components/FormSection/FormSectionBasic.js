@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import useInputs from '../../hooks/useInputs';
-import { Input } from '../Form';
+import { Input, Button } from '../Form';
 
 const initialState = {
   name: '',
@@ -10,40 +10,84 @@ const initialState = {
   email: '',
 };
 
-const FormSectionBasic = () => {
-  const { inputs, errors, onChange } = useInputs(initialState);
+const FormSectionBasic = ({ setPage }) => {
+  const { inputs, errors, onChange, validateAll } = useInputs(initialState);
 
+  const onClickButton = (ctg) => () => {
+    if (ctg === 'prev') {
+      setPage(0);
+    }
+    const isValid = validateAll();
+
+    if (isValid) {
+      setPage(page);
+    }
+  };
   return (
     <Wrapper>
       <Input
-        label="성함"
-        description="※ 정확한 정보 확인을 위해 실명으로 입력해주세요."
-        name="name"
-        value={inputs.name}
+        label="이름"
+        description="※ 등록할 영웅의 이름을 적어주세요."
+        name="heroName"
+        value={inputs.heroName}
         onChange={onChange}
-        errorMessage={errors.name}
+        errorMessage={errors.heroName}
       />
       <Input
-        label="이메일"
-        description="※ 등록이 완료되면 이메일이 발송됩니다."
-        name="email"
-        value={inputs.email}
-        type="email"
+        label="기념일"
+        description="※ 기념일을 적어주세요."
+        name="date"
+        value={inputs.date}
         onChange={onChange}
-        errorMessage={errors.email}
+        errorMessage={errors.date}
       />
       <Input
-        label="연락처"
-        description="※ 등록이 완료되면 문자가 발송됩니다."
-        name="phone"
-        value={inputs.phone}
+        label="출생년도"
+        description="※ 출생년도를 적어주세요."
+        name="birthDate"
+        value={inputs.birthDate}
         onChange={onChange}
-        errorMessage={errors.phone}
+        errorMessage={errors.birthDate}
       />
+      <Input
+        label="기념장소"
+        description="※ 기념장소 혹은 출생장소를 적어주세요."
+        name="birthDate"
+        value={inputs.birthDate}
+        onChange={onChange}
+        errorMessage={errors.birthDate}
+      />
+      <Input
+        label="태그"
+        description="※ 관련 태그를 추가해주세요"
+        name="tags"
+        value={inputs.tags}
+        onChange={onChange}
+        errorMessage={errors.tags}
+      />
+      <Button type="button" className="section-basic__prev" m="0 10px" onClick={onClickButton('prev')}>
+        이전
+      </Button>
+      <Button type="button" className="section-basic__next" m="0 10px" onClick={onClickButton('next')}>
+        다음
+      </Button>
     </Wrapper>
   );
 };
 
 export default FormSectionBasic;
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  .section-basic__prev,
+  .section-basic__next {
+    margin-top: 30px;
+    width: 150px;
+    background: ${(props) => props.theme.green[0]};
+  }
+
+  .section-basic__prev {
+    background: none;
+    color: ${(props) => props.theme.green[0]};
+    border: 2px solid ${(props) => props.theme.green[0]};
+  }
+`;
