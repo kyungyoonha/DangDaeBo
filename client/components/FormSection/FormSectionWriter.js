@@ -10,7 +10,7 @@ const initialState = {
   email: '',
 };
 
-const FormSectionBasic = () => {
+const FormSectionWriter = () => {
   const { inputs, errors, onChange } = useInputs(initialState);
 
   return (
@@ -21,6 +21,7 @@ const FormSectionBasic = () => {
         name="name"
         value={inputs.name}
         onChange={onChange}
+        required={true}
         errorMessage={errors.name}
       />
       <Input
@@ -30,6 +31,7 @@ const FormSectionBasic = () => {
         value={inputs.email}
         type="email"
         onChange={onChange}
+        required={true}
         errorMessage={errors.email}
       />
       <Input
@@ -38,12 +40,13 @@ const FormSectionBasic = () => {
         name="phone"
         value={inputs.phone}
         onChange={onChange}
+        required={true}
         errorMessage={errors.phone}
       />
     </Wrapper>
   );
 };
 
-export default FormSectionBasic;
+export default FormSectionWriter;
 
 const Wrapper = styled.div``;

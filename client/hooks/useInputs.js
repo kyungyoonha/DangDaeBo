@@ -8,9 +8,9 @@ const useInput = (initalValue) => {
   const onChange = useCallback(
     (e) => {
       const { name, value } = e.target;
-      const error = checkError(name, value, inputs);
+      const errorMessage = checkError(name, value, inputs);
 
-      setErrors((prev) => ({ ...prev, [name]: error }));
+      setErrors((prev) => ({ ...prev, [name]: errorMessage }));
       setInputs((prev) => ({ ...prev, [name]: value }));
 
       if (name === 'pw' && inputs.pwConfirm) {
@@ -48,29 +48,33 @@ export default useInput;
 
 const checkError = (name, value, inputs) => {
   let regExp;
-  let error = '';
-  if (value.length === 0) return error;
+  let errorMessage = '';
+  if (value.length === 0) return errorMessage;
   switch (name) {
     case 'name':
       regExp = /^[가-힣]{2,20}|[a-zA-Z]{2,20}$/;
-      error = !value.match(regExp) ? '표준 한글, 영문 이름을 입력해 주세요. (2~20자)' : '';
-      return error;
+      errorMessage = !value.match(regExp) ? '표준 한글, 영문 이름을 입력해 주세요. (2~20자)' : '';
+      return errorMessage;
 
     case 'email':
       regExp = /^([0-9a-zA-Z_-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
-      error = !value.match(regExp) ? '이메일 형식으로 입력해 주세요.' : '';
-      return error;
+      errorMessage = !value.match(regExp) ? '이메일 형식으로 입력해 주세요.' : '';
+      return errorMessage;
 
     case 'pw':
       regExp = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,15}$/;
-      error = !value.match(regExp) ? '하나 이상 문자 및 하나 이상 숫자를 입력해주세요.(8~15자)' : '';
-      return error;
+      errorMessage = !value.match(regExp) ? '하나 이상 문자 및 하나 이상 숫자를 입력해주세요.(8~15자)' : '';
+      return errorMessage;
 
     case 'pwConfirm':
-      error = inputs.pw !== value ? '비밀번호와 일치하지 않습니다.' : '';
-      return error;
+      errorMessage = inputs.pw !== value ? '비밀번호와 일치하지 않습니다.' : '';
+      return errorMessage;
 
+    case 'phone':
+      regExp = /^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/;
+      errorMessage = !value.match(regExp) ? '핸드폰 번호 형식에 맞게 입력해주세요.' : '';
+      return errorMessage;
     default:
-      return error;
+      return errorMessage;
   }
 };

@@ -10,7 +10,7 @@ const initialState = {
   email: '',
 };
 
-const FormSectionBasic = () => {
+const FormSectionAdditional = () => {
   const { inputs, errors, onChange } = useInputs(initialState);
 
   return (
@@ -44,6 +44,6 @@ const FormSectionBasic = () => {
   );
 };
 
-export default FormSectionBasic;
+export default FormSectionAdditional;
 
 const Wrapper = styled.div``;
