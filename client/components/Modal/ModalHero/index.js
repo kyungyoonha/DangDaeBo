@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-import ModalLayout from './ModalLayout';
-import Comments from '../Comments';
+import ModalLayout from '../ModalLayout';
+import Comments from './Comments';
 
 const dummyData = {
   id: 2,
@@ -193,6 +193,7 @@ const Wrapper = styled.div`
   }
 
   @media (min-width: 1200px) {
+    width: 1200px;
     .modal-header__buttons button {
       width: 170px;
     }

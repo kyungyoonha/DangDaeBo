@@ -35,19 +35,4 @@ const WrapperInner = styled.div`
   transform: translate(-50%, -50%);
   background: #fff;
   padding: 0 10px;
-  @media (min-width: 576px) {
-  }
-
-  @media (min-width: 768px) {
-    padding: 0 10px;
-  }
-
-  @media (min-width: 992px) {
-    padding: 0 10px;
-  }
-
-  @media (min-width: 1200px) {
-    width: 1200px;
-    margin: 0 auto;
-  }
 `;

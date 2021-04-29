@@ -112,3 +112,7 @@ export const checkTodayActiveRow = (weeks, key) => {
 
   return result;
 };
+
+export const numberToStringDate = (num) => {
+  return num < 10 ? `0${num}` : String(num);
+};

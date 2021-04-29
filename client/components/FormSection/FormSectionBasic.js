@@ -5,9 +5,11 @@ import useInputs from '../../hooks/useInputs';
 import { Input, Button } from '../Form';
 
 const initialState = {
-  name: '',
-  phone: '',
-  email: '',
+  heroName: '',
+  date: '',
+  birthDate: '',
+  location: '',
+  tags: '',
 };
 
 const FormSectionBasic = ({ setPage }) => {
@@ -52,10 +54,10 @@ const FormSectionBasic = ({ setPage }) => {
       <Input
         label="기념장소"
         description="※ 기념장소 혹은 출생장소를 적어주세요."
-        name="birthDate"
-        value={inputs.birthDate}
+        name="location"
+        value={inputs.location}
         onChange={onChange}
-        errorMessage={errors.birthDate}
+        errorMessage={errors.location}
       />
       <Input
         label="태그"

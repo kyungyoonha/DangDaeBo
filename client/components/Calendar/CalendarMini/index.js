@@ -3,8 +3,9 @@ import styled from 'styled-components';
 import router from 'next/router';
 
 import { Button } from '../../Form';
-import { calendarFunc, changeDataFormat, checkTodayActiveRow } from '../../../util/calendarFunc';
+import { calendarFunc, changeDataFormat, checkTodayActiveRow, numberToStringDate } from '../../../util/calendarFunc';
 import Weeks from './Weeks';
+import ModalSelectDate from './ModalSelectDate';
 
 const WeeksList = ['일', '월', '화', '수', '목', '금', '토'];
 
@@ -13,6 +14,7 @@ const CalendarMini = () => {
   const [month, setMonth] = useState(new Date().getMonth() + 1);
   const [date, setDate] = useState(new Date().getDate());
   const [dateKey, setDateKey] = useState('2021-01-01');
+  const [modalOpen, setModalOpen] = useState(false);
 
   const weeks = calendarFunc(year, month - 1);
   const activeRow = checkTodayActiveRow(weeks, dateKey);
@@ -45,34 +47,41 @@ const CalendarMini = () => {
     setDateKey(key);
   }, []);
 
+  const onCloseModal = useCallback(() => {
+    setModalOpen(false);
+  }, []);
+
   return (
-    <Wrapper>
-      <div className="calmini__header">
-        <Button onClick={onClickPrevButton}>
-          <i className="fas fa-angle-left"></i>
-        </Button>
-        <span>
-          {year}-{month}
-        </span>
-        <Button onClick={onClickNextButton}>
-          <i className="fas fa-angle-right"></i>
-        </Button>
-      </div>
-      <StyledTable>
-        <thead>
-          <tr>
-            {WeeksList.map((weekName) => (
-              <th key={weekName}>{weekName}</th>
+    <>
+      <Wrapper>
+        <div className="calmini__header">
+          <Button onClick={onClickPrevButton}>
+            <i className="fas fa-angle-left"></i>
+          </Button>
+          <span onClick={() => setModalOpen(true)}>
+            {year}-{numberToStringDate(month)}
+          </span>
+          <Button onClick={onClickNextButton}>
+            <i className="fas fa-angle-right"></i>
+          </Button>
+        </div>
+        <StyledTable>
+          <thead>
+            <tr>
+              {WeeksList.map((weekName) => (
+                <th key={weekName}>{weekName}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {weeks.map((week, idx) => (
+              <Weeks key={idx} week={week} isActive={idx === activeRow} dateKey={dateKey} onClick={onClickDate} />
             ))}
-          </tr>
-        </thead>
-        <tbody>
-          {weeks.map((week, idx) => (
-            <Weeks key={idx} week={week} isActive={idx === activeRow} dateKey={dateKey} onClick={onClickDate} />
-          ))}
-        </tbody>
-      </StyledTable>
-    </Wrapper>
+          </tbody>
+        </StyledTable>
+      </Wrapper>
+      {modalOpen && <ModalSelectDate onCloseModal={onCloseModal} />}
+    </>
   );
 };
 
