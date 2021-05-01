@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
@@ -10,8 +10,13 @@ import Logo from './Logo';
 
 const Header = () => {
   const asPath = useRouter().asPath;
+  const [active, setActive] = useState('/'); // className 에러 때문에 그냥 state로 관리
   const dispatch = useDispatch();
   const { me } = useSelector((state) => state.user);
+
+  useEffect(() => {
+    setActive(asPath);
+  }, [asPath]);
 
   const onClickLogOut = () => {
     dispatch({
@@ -27,16 +32,16 @@ const Header = () => {
       </Row>
       <StyledRow show="m" width="calc(80% - 170px)">
         <ul className="nav__list">
-          <li className={`nav__item ${asPath === '/' ? 'nav__item--active' : ''}`}>
+          <li className={`nav__item ${active === '/' ? 'nav__item--active' : ''}`}>
             <Link href="/">이번달 영웅</Link>
           </li>
-          <li className={`nav__item ${asPath === '/today' ? 'nav__item--active' : ''}`}>
+          <li className={`nav__item ${active === '/today' ? 'nav__item--active' : ''}`}>
             <Link href="/today">오늘의 영웅</Link>
           </li>
-          <li className={`nav__item ${asPath === '/register' ? 'nav__item--active' : ''}`}>
+          <li className={`nav__item ${active === '/register' ? 'nav__item--active' : ''}`}>
             <Link href="/register">영웅 등록</Link>
           </li>
-          <li className={`nav__item ${asPath === '/info' ? 'nav__item--active' : ''}`}>
+          <li className={`nav__item ${active === '/info' ? 'nav__item--active' : ''}`}>
             <Link href="/info">소개</Link>
           </li>
         </ul>
@@ -109,5 +114,8 @@ const StyledRow = styled(Row)`
     &--active a {
       color: #000;
     }
+  }
+  .active {
+    color: #000;
   }
 `;

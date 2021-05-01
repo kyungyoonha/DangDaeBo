@@ -41,7 +41,11 @@ const SelectYear = ({ year, onChangeYear }) => {
           <div className="last" ref={ref}></div>
         </div>
       )}
-      <ion-icon name="chevron-down-outline"></ion-icon>
+      <ion-icon
+        name="chevron-down-outline"
+        class="ionicon s-ion-icon md hydrated"
+        role="img"
+        aria-label="chevron down outline"></ion-icon>
     </Wrapper>
   );
 };
