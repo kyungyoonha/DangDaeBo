@@ -4,14 +4,13 @@ const useObserver = (fetchMoreData) => {
   const ref = useRef(null);
 
   useEffect(() => {
-    if (ref.current) return;
+    if (!ref.current) return;
     const options = { threshold: 0.5 };
     const observer = new IntersectionObserver(handleObserver, options);
     observer.observe(ref.current);
 
     function handleObserver(entries, observer) {
       entries.forEach((entry) => {
-        console.log('z', entry);
         if (!entry.isIntersecting) return;
         fetchMoreData();
         observer.unobserve(entry.target);
@@ -19,7 +18,7 @@ const useObserver = (fetchMoreData) => {
     }
 
     return () => observer && observer.disconnect();
-  }, [ref]);
+  }, [ref, fetchMoreData]);
 
   return ref;
 };

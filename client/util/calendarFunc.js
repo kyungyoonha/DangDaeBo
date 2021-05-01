@@ -94,7 +94,7 @@ export const calendarFunc = (year, month) => {
 
 export const changeDataFormat = (year, month, date) => {
   const monthString = month < 10 ? `0${Number(month) + 1}` : String(month + 1);
-  const dateString = date < 10 ? `0${date}` : String(date);
+  const dateString = date < 10 ? `0${Number(date)}` : String(date);
 
   return `${year}-${monthString}-${dateString}`;
 };
@@ -111,8 +111,4 @@ export const checkTodayActiveRow = (weeks, key) => {
   }
 
   return result;
-};
-
-export const numberToStringDate = (num) => {
-  return num < 10 ? `0${num}` : String(num);
 };
