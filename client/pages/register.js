@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import Header from '../components/Header';
 import { Container } from '../components/Layout';
-import { FormSectionWriter, FormSectionBasic } from '../components/FormSection';
+import { FormSectionWriter, FormSectionBasic, FormSectionAdditional } from '../components/FormSection';
 
 const Page = ({ page, setPage }) => {
   switch (page) {
@@ -17,7 +17,7 @@ const Page = ({ page, setPage }) => {
 };
 
 const Register = () => {
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(2);
 
   return (
     <>
@@ -42,14 +42,6 @@ const Register = () => {
               </span>
             </div>
             <Page page={page} setPage={setPage} />
-            {/* <Button
-              type="button"
-              className={`register-form__button register-form__button${page === 2 ? '--submit' : '--next'}`}
-              onClick={(e) => {
-                console.log(e);
-              }}>
-              {page === 2 ? '제출' : '다음'}
-            </Button> */}
           </FormWrapper>
         </Container>
       </Contents>

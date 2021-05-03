@@ -13,16 +13,26 @@ const initialState = {
 };
 
 const FormSectionBasic = ({ setPage }) => {
-  const { inputs, errors, onChange, validateAll } = useInputs(initialState);
+  const { inputs, errors, setErrors, onChange } = useInputs(initialState);
 
   const onClickButton = (ctg) => () => {
     if (ctg === 'prev') {
       setPage(0);
     }
-    const isValid = validateAll();
+    let isValid = true;
+    let validCheck = ['heroName', 'date'];
+    validCheck.forEach((item) => {
+      if (!inputs[item]) {
+        isValid = false;
+        setErrors((prev) => ({
+          ...prev,
+          [item]: '필수입력값 입니다.',
+        }));
+      }
+    });
 
     if (isValid) {
-      setPage(page);
+      setPage(2);
     }
   };
   return (
