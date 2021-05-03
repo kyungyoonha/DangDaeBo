@@ -3,21 +3,21 @@ import styled from 'styled-components';
 
 import Header from '../components/Header';
 import { Container } from '../components/Layout';
-import { FormSectionWriter, FormSectionBasic } from '../components/FormSection';
+import { SectionWriter, SectionBasic, SectionAdditional } from '../components/Form';
 
 const Page = ({ page, setPage }) => {
   switch (page) {
     case 1:
-      return <FormSectionBasic setPage={setPage} />;
+      return <SectionBasic setPage={setPage} />;
     case 2:
-      return <FormSectionAdditional setPage={setPage} />;
+      return <SectionAdditional setPage={setPage} />;
     default:
-      return <FormSectionWriter setPage={setPage} />;
+      return <SectionWriter setPage={setPage} />;
   }
 };
 
 const Register = () => {
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(2);
 
   return (
     <>
@@ -42,14 +42,6 @@ const Register = () => {
               </span>
             </div>
             <Page page={page} setPage={setPage} />
-            {/* <Button
-              type="button"
-              className={`register-form__button register-form__button${page === 2 ? '--submit' : '--next'}`}
-              onClick={(e) => {
-                console.log(e);
-              }}>
-              {page === 2 ? '제출' : '다음'}
-            </Button> */}
           </FormWrapper>
         </Container>
       </Contents>

@@ -2,7 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 import useInputs from '../../hooks/useInputs';
-import { Input, Button } from '../Form';
+import Input from './Input';
+import Button from './Button';
 
 const initialState = {
   heroName: '',
@@ -12,17 +13,27 @@ const initialState = {
   tags: '',
 };
 
-const FormSectionBasic = ({ setPage }) => {
-  const { inputs, errors, onChange, validateAll } = useInputs(initialState);
+const SectionBasic = ({ setPage }) => {
+  const { inputs, errors, setErrors, onChange } = useInputs(initialState);
 
   const onClickButton = (ctg) => () => {
     if (ctg === 'prev') {
       setPage(0);
     }
-    const isValid = validateAll();
+    let isValid = true;
+    let validCheck = ['heroName', 'date'];
+    validCheck.forEach((item) => {
+      if (!inputs[item]) {
+        isValid = false;
+        setErrors((prev) => ({
+          ...prev,
+          [item]: '필수입력값 입니다.',
+        }));
+      }
+    });
 
     if (isValid) {
-      setPage(page);
+      setPage(2);
     }
   };
   return (
@@ -77,7 +88,7 @@ const FormSectionBasic = ({ setPage }) => {
   );
 };
 
-export default FormSectionBasic;
+export default SectionBasic;
 
 const Wrapper = styled.div`
   .section-basic__prev,
