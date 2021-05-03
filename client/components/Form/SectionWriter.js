@@ -2,7 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 import useInputs from '../../hooks/useInputs';
-import { Input, Button } from '../Form';
+import Input from './Input';
+import Button from './Button';
 
 const initialState = {
   name: '',
@@ -10,7 +11,7 @@ const initialState = {
   email: '',
 };
 
-const FormSectionWriter = ({ setPage }) => {
+const SectionWriter = ({ setPage }) => {
   const { inputs, errors, onChange, validateAll } = useInputs(initialState);
 
   const onClickButton = () => {
@@ -58,7 +59,7 @@ const FormSectionWriter = ({ setPage }) => {
   );
 };
 
-export default FormSectionWriter;
+export default SectionWriter;
 
 const Wrapper = styled.div`
   .form-section-writer__button {

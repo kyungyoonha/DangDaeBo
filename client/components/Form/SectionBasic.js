@@ -2,7 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 import useInputs from '../../hooks/useInputs';
-import { Input, Button } from '../Form';
+import Input from './Input';
+import Button from './Button';
 
 const initialState = {
   heroName: '',
@@ -12,7 +13,7 @@ const initialState = {
   tags: '',
 };
 
-const FormSectionBasic = ({ setPage }) => {
+const SectionBasic = ({ setPage }) => {
   const { inputs, errors, setErrors, onChange } = useInputs(initialState);
 
   const onClickButton = (ctg) => () => {
@@ -87,7 +88,7 @@ const FormSectionBasic = ({ setPage }) => {
   );
 };
 
-export default FormSectionBasic;
+export default SectionBasic;
 
 const Wrapper = styled.div`
   .section-basic__prev,

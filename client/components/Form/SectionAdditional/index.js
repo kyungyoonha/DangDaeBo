@@ -1,19 +1,20 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
 
-import { Button } from '../Form';
+import Button from '../Button';
+import Gallery from './Gallery';
+import Info from './Info';
 
 const initialState = {
-  imageArray: ['few'],
-  infoArray: [],
+  imageArray: [],
+  infoArray: [{ title: 'few', content: 'fewfwe' }],
 };
 
-const FormSectionAdditional = ({ setPage }) => {
-  const buttonRef = useRef();
+const SectionAdditional = ({ setPage }) => {
   const [state, setState] = useState(initialState);
   const { imageArray, infoArray } = state;
   // TODO. 바로 업로드 후 URL만 저장
-  const onUloadImage = (e) => {
+  const onChangeImage = useCallback((e) => {
     const { files } = e.target;
 
     let imageUrls = [];
@@ -29,7 +30,20 @@ const FormSectionAdditional = ({ setPage }) => {
     } else {
       setState({ ...state, imageArray: newImageArray });
     }
-  };
+  }, []);
+
+  const onChangeInfo = useCallback(
+    (name) => (e) => {
+      setState({
+        ...state,
+        info: {
+          ...state.info,
+          [name]: e.target.value,
+        },
+      });
+    },
+    []
+  );
 
   const onClickButton = (ctg) => () => {
     if (ctg === 'prev') {
@@ -42,30 +56,8 @@ const FormSectionAdditional = ({ setPage }) => {
         <h3>영웅과 관련된 정보를 자유롭게 작성해주세요.</h3>
         <p>(신문기사, 사진, 업적 등등)</p>
       </div>
-      <div className="gallery">
-        <h3 className="galery__title">※ 사진 업로드</h3>
-        <input
-          name="pictures"
-          type="file"
-          id="pictures"
-          accept="image/*"
-          multiple
-          ref={buttonRef}
-          hidden
-          onChange={onUloadImage}
-        />
-        <div className="gallery__list">
-          {imageArray.map((src, idx) => (
-            <img key={idx} className="gallery__item" src={src} />
-          ))}
-          {imageArray.length < 10 && (
-            <div className="gallery__add" onClick={() => buttonRef.current.click()}>
-              <i className="fas fa-plus"></i>
-            </div>
-          )}
-        </div>
-      </div>
-
+      <Gallery imageArray={imageArray} onChangeImage={onChangeImage} />
+      <Info infoArray={infoArray} onChangeInfo={onChangeInfo} />
       <Button type="button" className="section-add__prev" m="0 10px" onClick={onClickButton('prev')}>
         이전
       </Button>
@@ -76,54 +68,13 @@ const FormSectionAdditional = ({ setPage }) => {
   );
 };
 
-export default FormSectionAdditional;
+export default SectionAdditional;
 
 const Wrapper = styled.div`
   .section-add__title {
     margin-bottom: 30px;
     color: ${(props) => props.theme.gray[0]};
     font-size: 0.9rem;
-  }
-
-  .gallery {
-    text-align: left;
-
-    .galery__title {
-      margin: 20px 0 10px;
-    }
-    .gallery__list {
-      display: flex;
-      justify-content: flex-start;
-      flex-wrap: wrap;
-    }
-
-    .gallery__item,
-    .gallery__add {
-      width: 140px;
-      height: 140px;
-    }
-
-    .gallery__item {
-      background: red;
-      margin-right: 10px;
-      margin-bottom: 10px;
-      object-fit: cover;
-    }
-
-    .gallery__add {
-      position: relative;
-      border: 2px solid ${(props) => props.theme.line[1]};
-      cursor: pointer;
-
-      i {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        font-size: 3rem;
-        color: ${(props) => props.theme.line[1]};
-      }
-    }
   }
 
   .section-add__prev,
