@@ -1,9 +1,11 @@
 import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
+import { useSelector, useDispatch } from 'react-redux';
 
 import Button from '../Button';
 import Gallery from './Gallery';
 import Info from './Info';
+import { FORM_UPLOAD_REQUEST } from '../../../reducers/formReducer';
 
 const initialState = {
   imageArray: [],
@@ -11,25 +13,41 @@ const initialState = {
 };
 
 const SectionAdditional = ({ setPage }) => {
-  const [state, setState] = useState(initialState);
-  const { imageArray, infoArray } = state;
-  // TODO. 바로 업로드 후 URL만 저장
+  const dispatch = useDispatch();
+  const { imageArray, infoArray } = useSelector((state) => state.form);
+  // const [state, setState] = useState(initialState);
+  // const { imageArray, infoArray } = state;
+
   const onChangeImage = useCallback((e) => {
     const { files } = e.target;
-
-    let imageUrls = [];
+    const formData = new FormData();
     for (let i = 0; i < files.length; i++) {
-      const url = URL.createObjectURL(event.target.files[i]);
-      imageUrls[i] = url;
+      if (i > 9) {
+        alert('사진은 10개까지만 업로드됩니다.');
+        break;
+      }
+      formData.append('image', files[i]);
     }
+    dispatch({
+      type: FORM_UPLOAD_REQUEST,
+      payload: formData,
+    });
 
-    const newImageArray = [...state.imageArray, ...imageUrls];
-    if (newImageArray.length > 10) {
-      alert('사진은 최대 10개까지만 업로드 가능합니다.');
-      setState({ ...state, imageArray: newImageArray.slice(0, 10) });
-    } else {
-      setState({ ...state, imageArray: newImageArray });
-    }
+    // const { files } = e.target;
+
+    // let imageUrls = [];
+    // for (let i = 0; i < files.length; i++) {
+    //   const url = URL.createObjectURL(event.target.files[i]);
+    //   imageUrls[i] = url;
+    // }
+
+    // const newImageArray = [...state.imageArray, ...imageUrls];
+    // if (newImageArray.length > 10) {
+    //   alert('사진은 최대 10개까지만 업로드 가능합니다.');
+    //   setState({ ...state, imageArray: newImageArray.slice(0, 10) });
+    // } else {
+    //   setState({ ...state, imageArray: newImageArray });
+    // }
   }, []);
 
   const onChangeInfo = useCallback(
