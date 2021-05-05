@@ -1,16 +1,4 @@
 import produce from '../util/produce';
-const initialState = {
-  signInLoading: false,
-  signInError: null,
-  signInDone: false,
-  signUpLoading: false,
-  signUpError: null,
-  signUpDone: false,
-  loadMyInfoLoading: false,
-  loadMyInfoError: null,
-  loadMyInfoDone: false,
-  me: null,
-};
 
 export const SIGN_IN_REQUEST = 'SIGN_IN_REQUEST';
 export const SIGN_IN_SUCCESS = 'SIGN_IN_SUCCESS';
@@ -27,6 +15,19 @@ export const SIGN_OUT_FAILURE = 'SIGN_OUT_FAILURE';
 export const LOAD_MY_INFO_REQUEST = 'LOAD_MY_INFO_REQUEST';
 export const LOAD_MY_INFO_SUCCESS = 'LOAD_MY_INFO_SUCCESS';
 export const LOAD_MY_INFO_FAILURE = 'LOAD_MY_INFO_FAILURE';
+
+const initialState = {
+  signInLoading: false,
+  signInError: null,
+  signInDone: false,
+  signUpLoading: false,
+  signUpError: null,
+  signUpDone: false,
+  loadMyInfoLoading: false,
+  loadMyInfoError: null,
+  loadMyInfoDone: false,
+  me: null,
+};
 
 const reducer = (state = initialState, action) =>
   produce(state, (draft) => {

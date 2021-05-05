@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import { useSelector, useDispatch } from 'react-redux';
 
+import { FORM_SUBMIT_WRITER } from '../../reducers/formReducer';
 import useInputs from '../../hooks/useInputs';
 import Input from './Input';
 import Button from './Button';
@@ -12,14 +14,24 @@ const initialState = {
 };
 
 const SectionWriter = ({ setPage }) => {
-  const { inputs, errors, onChange, validateAll } = useInputs(initialState);
+  const dispatch = useDispatch();
+  const writer = useSelector((state) => state.form.writer);
+  const { inputs, setInputs, errors, onChange, validateAll } = useInputs(initialState);
+
+  useEffect(() => {
+    if (!Object.keys(writer).length) return;
+    setInputs(writer);
+  }, []);
 
   const onClickButton = () => {
     const isValid = validateAll();
+    if (!isValid) return;
 
-    if (isValid) {
-      setPage(1);
-    }
+    dispatch({
+      type: FORM_SUBMIT_WRITER,
+      payload: inputs,
+    });
+    setPage(1);
   };
   return (
     <Wrapper>

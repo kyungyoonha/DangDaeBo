@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import { useSelector, useDispatch } from 'react-redux';
 
 import useInputs from '../../hooks/useInputs';
 import Input from './Input';
 import Button from './Button';
+import { FORM_SUBMIT_BASIC } from '../../reducers/formReducer';
 
 const initialState = {
   heroName: '',
@@ -14,27 +16,34 @@ const initialState = {
 };
 
 const SectionBasic = ({ setPage }) => {
-  const { inputs, errors, setErrors, onChange } = useInputs(initialState);
+  const dispatch = useDispatch();
+  const hero = useSelector((state) => state.form.hero);
+  const { inputs, setInputs, errors, setErrors, onChange } = useInputs(initialState);
 
-  const onClickButton = (ctg) => () => {
-    if (ctg === 'prev') {
-      setPage(0);
-    }
+  useEffect(() => {
+    if (!Object.keys(hero).length) return;
+    setInputs(hero);
+  }, []);
+
+  const onClickButtonPrev = () => setPage(0);
+
+  const onClickButtonNext = () => {
     let isValid = true;
     let validCheck = ['heroName', 'date'];
     validCheck.forEach((item) => {
       if (!inputs[item]) {
         isValid = false;
-        setErrors((prev) => ({
-          ...prev,
-          [item]: '필수입력값 입니다.',
-        }));
+        setErrors((prev) => ({ ...prev, [item]: '필수입력값 입니다.' }));
       }
     });
 
-    if (isValid) {
-      setPage(2);
-    }
+    if (!isValid) return;
+
+    dispatch({
+      type: FORM_SUBMIT_BASIC,
+      payload: inputs,
+    });
+    setPage(2);
   };
   return (
     <Wrapper>
@@ -78,10 +87,10 @@ const SectionBasic = ({ setPage }) => {
         onChange={onChange}
         errorMessage={errors.tags}
       />
-      <Button type="button" className="section-basic__prev" m="0 10px" onClick={onClickButton('prev')}>
+      <Button type="button" className="section-basic__prev" m="0 10px" onClick={onClickButtonPrev}>
         이전
       </Button>
-      <Button type="button" className="section-basic__next" m="0 10px" onClick={onClickButton('next')}>
+      <Button type="button" className="section-basic__next" m="0 10px" onClick={onClickButtonNext}>
         다음
       </Button>
     </Wrapper>

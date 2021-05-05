@@ -1,5 +1,6 @@
 import { HYDRATE } from 'next-redux-wrapper';
 import { combineReducers } from 'redux';
+import formReducer from './formReducer';
 
 import userReducer from './userReducer';
 
@@ -13,6 +14,7 @@ const rootReducer = (state, action) => {
     default: {
       const combinedReducer = combineReducers({
         user: userReducer,
+        form: formReducer,
       });
       return combinedReducer(state, action);
     }
