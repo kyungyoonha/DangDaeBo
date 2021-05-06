@@ -1,9 +1,29 @@
 import React, { useRef } from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
 
-const Gallery = ({ imageArray, onChangeImage }) => {
+import { FORM_UPLOAD_REQUEST } from '../../../reducers/formReducer';
+
+const Gallery = () => {
   const buttonRef = useRef();
+  const dispatch = useDispatch();
+  const { imageArray } = useSelector((state) => state.form);
+
+  const onChangeImage = (e) => {
+    const { files } = e.target;
+    const formData = new FormData();
+    for (let i = 0; i < files.length; i++) {
+      if (i > 9) {
+        alert('사진은 10개까지만 업로드됩니다.');
+        break;
+      }
+      formData.append('image', files[i]);
+    }
+    dispatch({
+      type: FORM_UPLOAD_REQUEST,
+      payload: formData,
+    });
+  };
 
   return (
     <Wrapper className="gallery">
@@ -30,11 +50,6 @@ const Gallery = ({ imageArray, onChangeImage }) => {
       </div>
     </Wrapper>
   );
-};
-
-Gallery.propsTypes = {
-  imageArray: PropTypes.array.isRequired,
-  onUloadImage: PropTypes.func.isRequired,
 };
 
 export default Gallery;

@@ -1,45 +1,69 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from 'react-redux';
 
-const Info = ({ infoArray, onChangeInfo }) => {
+import { FORM_INFO_ARRAY_CHANGE, FORM_INFO_ARRAY_ADD } from '../../../reducers/formReducer';
+
+const Info = () => {
+  const [nextId, setNextId] = useState(1);
+  const dispatch = useDispatch();
+  const { infoArray } = useSelector((state) => state.form);
+
+  const onChangeInfo = (id) => (e) => {
+    const { name, value } = e.target;
+    dispatch({
+      type: FORM_INFO_ARRAY_CHANGE,
+      payload: {
+        id,
+        [name]: value,
+      },
+    });
+  };
+
+  const onAddInfo = () => {
+    dispatch({
+      type: FORM_INFO_ARRAY_ADD,
+      payload: {
+        id: nextId,
+        title: '',
+        content: '',
+      },
+    });
+    setNextId((prev) => prev + 1);
+  };
+
   return (
     <Wrapper className="info">
       <h3>※ 추가 정보</h3>
-      {infoArray.map((info, idx) => (
-        <div key={idx} className="info__Wrapper">
-          <h3 className="info__title">문답1</h3>
-          <div className="info-section">
+      {infoArray.map((info) => (
+        <div key={info.id} className="info-section">
+          <h3 className="info-section__head">문답1</h3>
+          <div className="info-section__box">
             <div className="info-section__title">제목</div>
             <input
-              name="info-section__input"
+              name="title"
               value={info.title}
               placeholder="제목을 입력해주세요."
-              onChange={onChangeInfo('title')}
+              onChange={onChangeInfo(info.id)}
             />
           </div>
-          <div className="info-section">
+          <div className="info-section__box">
             <div className="info-section__title">제목</div>
             <textarea
-              name="info__content"
+              name="content"
               value={info.content}
               placeholder="내용을 입력해주세요."
-              onChange={onChangeInfo('content')}
+              onChange={onChangeInfo(info.id)}
               rows="7"
             />
           </div>
         </div>
       ))}
-      <button className="info__button" type="button">
+      <button className="info__button" type="button" onClick={onAddInfo}>
         내용 추가하기
       </button>
     </Wrapper>
   );
-};
-
-Info.propTypes = {
-  infoArray: PropTypes.array.isRequired,
-  onChangeInfo: PropTypes.func.isRequired,
 };
 
 export default Info;
@@ -50,34 +74,34 @@ const Wrapper = styled.div`
     margin: 20px 0 10px;
   }
 
-  .info__Wrapper {
+  .info-section {
     padding: 10px 20px;
+    margin-bottom: 30px;
     border: 1px solid ${(props) => props.theme.gray[0]};
     border-radius: 10px;
     background: #f1f0e9;
-  }
-
-  .info__title {
-    text-align: center;
-  }
-  input,
-  textarea {
-    padding: 10px 20px;
-    width: 100%;
-    border: 1px solid ${(props) => props.theme.gray[0]};
-    border-radius: 5px;
-    background: #fff;
-  }
-
-  .info-section {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 20px;
-
-    &__title {
-      width: 80px;
+    .info-section__head {
       text-align: center;
+    }
+    input,
+    textarea {
+      padding: 10px 20px;
+      width: 100%;
+      border: 1px solid ${(props) => props.theme.gray[0]};
+      border-radius: 5px;
+      background: #fff;
+    }
+
+    .info-section__box {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+
+      &__title {
+        width: 80px;
+        text-align: center;
+      }
     }
   }
 

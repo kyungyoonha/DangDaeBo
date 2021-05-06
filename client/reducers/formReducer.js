@@ -1,6 +1,11 @@
+import produce from '../util/produce';
+
 export const FORM_SUBMIT_WRITER = 'FORM_SUBMIT_WRITER';
 export const FORM_SUBMIT_BASIC = 'FORM_SUBMIT_BASIC';
 export const FORM_SUBMIT_ADDITIONAL = 'FORM_SUBMIT_ADDITIONAL';
+
+export const FORM_INFO_ARRAY_CHANGE = 'FORM_INFO_ARRAY_CHANGE';
+export const FORM_INFO_ARRAY_ADD = 'FORM_INFO_ARRAY_ADD';
 
 export const FORM_UPLOAD_REQUEST = 'FORM_UPLOAD_REQUEST';
 export const FORM_UPLOAD_SUCCESS = 'FORM_UPLOAD_SUCCESS';
@@ -10,18 +15,10 @@ const initialState = {
   writer: {},
   hero: {},
   imageArray: [],
-  infoArray: [],
+  infoArray: [{ id: 0, title: '', content: '' }],
   uploadLoading: false,
   uploadError: null,
   uploadDone: false,
-};
-
-export const uploadImages = (e) => {
-  const { files } = e.target;
-  const formData = new FormData();
-  for (let i = 0; i < files.length; i++) {
-    formData.append('image', files[i]);
-  }
 };
 
 const formReducer = (state = initialState, action) =>
@@ -51,6 +48,19 @@ const formReducer = (state = initialState, action) =>
             ...action.payload,
           },
         };
+      case FORM_INFO_ARRAY_CHANGE:
+        return {
+          ...state,
+          infoArray: state.infoArray.map((item) =>
+            item.id === action.payload.id ? { ...item, ...action.payload } : item
+          ),
+        };
+      case FORM_INFO_ARRAY_ADD:
+        return {
+          ...state,
+          infoArray: [...state.infoArray, action.payload],
+        };
+
       case FORM_UPLOAD_REQUEST:
         draft.signOutLoading = true;
         draft.signOutError = null;
