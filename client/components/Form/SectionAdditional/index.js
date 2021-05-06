@@ -1,68 +1,11 @@
-import React, { useState, useCallback } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { useSelector, useDispatch } from 'react-redux';
 
 import Button from '../Button';
 import Gallery from './Gallery';
 import Info from './Info';
-import { FORM_UPLOAD_REQUEST } from '../../../reducers/formReducer';
-
-const initialState = {
-  imageArray: [],
-  infoArray: [{ title: 'few', content: 'fewfwe' }],
-};
 
 const SectionAdditional = ({ setPage }) => {
-  const dispatch = useDispatch();
-  const { imageArray, infoArray } = useSelector((state) => state.form);
-  // const [state, setState] = useState(initialState);
-  // const { imageArray, infoArray } = state;
-
-  const onChangeImage = useCallback((e) => {
-    const { files } = e.target;
-    const formData = new FormData();
-    for (let i = 0; i < files.length; i++) {
-      if (i > 9) {
-        alert('사진은 10개까지만 업로드됩니다.');
-        break;
-      }
-      formData.append('image', files[i]);
-    }
-    dispatch({
-      type: FORM_UPLOAD_REQUEST,
-      payload: formData,
-    });
-
-    // const { files } = e.target;
-
-    // let imageUrls = [];
-    // for (let i = 0; i < files.length; i++) {
-    //   const url = URL.createObjectURL(event.target.files[i]);
-    //   imageUrls[i] = url;
-    // }
-
-    // const newImageArray = [...state.imageArray, ...imageUrls];
-    // if (newImageArray.length > 10) {
-    //   alert('사진은 최대 10개까지만 업로드 가능합니다.');
-    //   setState({ ...state, imageArray: newImageArray.slice(0, 10) });
-    // } else {
-    //   setState({ ...state, imageArray: newImageArray });
-    // }
-  }, []);
-
-  const onChangeInfo = useCallback(
-    (name) => (e) => {
-      setState({
-        ...state,
-        info: {
-          ...state.info,
-          [name]: e.target.value,
-        },
-      });
-    },
-    []
-  );
-
   const onClickButton = (ctg) => () => {
     if (ctg === 'prev') {
       setPage(1);
@@ -74,8 +17,8 @@ const SectionAdditional = ({ setPage }) => {
         <h3>영웅과 관련된 정보를 자유롭게 작성해주세요.</h3>
         <p>(신문기사, 사진, 업적 등등)</p>
       </div>
-      <Gallery imageArray={imageArray} onChangeImage={onChangeImage} />
-      <Info infoArray={infoArray} onChangeInfo={onChangeInfo} />
+      <Gallery />
+      <Info />
       <Button type="button" className="section-add__prev" m="0 10px" onClick={onClickButton('prev')}>
         이전
       </Button>

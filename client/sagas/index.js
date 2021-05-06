@@ -3,10 +3,11 @@ import axios from 'axios';
 
 //import postSaga from './post';
 import userSaga from './userSaga';
+import formSaga from './formSaga';
 import { backUrl } from '../config/config';
 axios.defaults.baseURL = backUrl;
 axios.defaults.withCredentials = true;
 
 export default function* rootSaga() {
-  yield all([fork(userSaga)]);
+  yield all([fork(userSaga), fork(formSaga)]);
 }
