@@ -11,6 +11,7 @@ import Logo from './Logo';
 const Header = () => {
   const asPath = useRouter().asPath;
   const [active, setActive] = useState('/'); // className 에러 때문에 그냥 state로 관리
+  const [showNav, setShowNav] = useState(false);
   const dispatch = useDispatch();
   const { me } = useSelector((state) => state.user);
 
@@ -25,13 +26,14 @@ const Header = () => {
   };
   return (
     <Wrapper>
-      <Row className="header-logo" width="20%">
+      <Row className="header-logo" width="200px">
         <a href="/">
           <Logo />
         </a>
       </Row>
-      <StyledRow show="m" width="calc(80% - 170px)">
-        <ul className="nav__list">
+      <Nav width="calc(100% - 370px)">
+        <i className="fas fa-bars" onClick={() => setShowNav(!showNav)}></i>
+        <ul className={`nav__list ${showNav ? 'nav__list--show' : ''}`}>
           <li className={`nav__item ${active === '/' ? 'nav__item--active' : ''}`}>
             <Link href="/">이번달 영웅</Link>
           </li>
@@ -45,7 +47,8 @@ const Header = () => {
             <Link href="/info">소개</Link>
           </li>
         </ul>
-      </StyledRow>
+      </Nav>
+
       <Row className="header-user" width="170px">
         {me ? (
           <>
@@ -74,7 +77,6 @@ const Wrapper = styled.div`
   line-height: 100px;
   border-bottom: 1px solid ${(props) => props.theme.line[1]};
   .header-logo {
-    width: 20%;
     float: left;
   }
   img {
@@ -93,9 +95,18 @@ const Wrapper = styled.div`
   }
 `;
 
-const StyledRow = styled(Row)`
+const Nav = styled(Row)`
   text-align: center;
-
+  position: relative;
+  i {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5rem;
+    color: ${(props) => props.theme.gray[1]};
+  }
   .nav__list {
     height: 100%;
     display: inline-block;
@@ -117,5 +128,34 @@ const StyledRow = styled(Row)`
   }
   .active {
     color: #000;
+  }
+
+  @media (max-width: 992px) {
+    i {
+      display: inline-block;
+    }
+
+    .nav__list {
+      display: none;
+      position: absolute;
+      top: 100px;
+      left: 0px;
+      width: 100%;
+      height: auto;
+      background: #fff;
+      border: 1px solid ${(props) => props.theme.line[0]};
+      z-index: 100;
+
+      &--show {
+        display: flex !important;
+        flex-direction: column;
+      }
+    }
+
+    .nav__item {
+      height: 50px;
+      line-height: 50px;
+      margin-right: 0;
+    }
   }
 `;
