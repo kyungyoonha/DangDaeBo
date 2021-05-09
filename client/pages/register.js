@@ -17,7 +17,7 @@ const Page = ({ page, setPage }) => {
 };
 
 const Register = () => {
-  const [page, setPage] = useState(2);
+  const [page, setPage] = useState(0);
 
   return (
     <>

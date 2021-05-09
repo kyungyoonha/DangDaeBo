@@ -17,7 +17,7 @@ const Logo = ({ width }) => {
             <span>대</span>한민국의
           </p>
           <p>
-            <span>보</span>배입니다
+            <span>영</span>웅입니다
           </p>
         </Text>
       </Wrapper>

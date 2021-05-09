@@ -58,6 +58,7 @@ const SectionBasic = ({ setPage }) => {
       <Input
         label="기념일"
         description="※ 기념일을 적어주세요."
+        type="date"
         name="date"
         value={inputs.date}
         onChange={onChange}
@@ -66,6 +67,7 @@ const SectionBasic = ({ setPage }) => {
       <Input
         label="출생년도"
         description="※ 출생년도를 적어주세요."
+        type="date"
         name="birthDate"
         value={inputs.birthDate}
         onChange={onChange}

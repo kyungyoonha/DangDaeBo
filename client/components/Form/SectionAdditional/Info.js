@@ -48,7 +48,7 @@ const Info = () => {
             />
           </div>
           <div className="info-section__box">
-            <div className="info-section__title">제목</div>
+            <div className="info-section__title">내용</div>
             <textarea
               name="content"
               value={info.content}
